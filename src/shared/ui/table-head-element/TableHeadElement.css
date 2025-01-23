@@ -1,0 +1,48 @@
+.container {
+    width: 96px;
+    height: 72px;
+    border-radius: 10px;
+    padding: 12px;
+    transition: 100ms all ease-in-out;
+    font-weight: 700;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+    border: 1px solid transparent;
+
+    &:hover {
+        border-color: var(--light-gray);
+    }
+
+    & .day {
+        font-size: 18px;
+        line-height: 18px;
+        color: var(--light-gray);
+    }
+
+    & .date {
+        font-size: 20px;
+        line-height: 20px;
+        color: var(--gray);
+    }
+
+    &[data-current="true"] {
+        background-color: var(--red);
+
+        & .day {
+            color: var(--white);
+        }
+
+        & .date {
+            color: var(--white);
+        }
+    }
+
+}
+
+
+

@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Open Sans';
+    src: url('./shared/ui/assets/fonts/OpenSans-VariableFont_wdth,wght.ttf') format('truetype');
+}
+
 :global :root {
     --black: #26354C;
     --green: #0D977D;
@@ -6,8 +11,11 @@
     --light-gray: #DADADA;
     --white: #FBFCFC;
     --red: #E75A62;
+
+    --open-sans: 'Open Sans';
 }
 
 :global * {
     box-sizing: border-box;
+    font-family: var(--open-sans), sans-serif;
 }
