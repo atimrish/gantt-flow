@@ -12,7 +12,7 @@ const config: StorybookConfig = {
         "@chromatic-com/storybook",
         "@storybook/addon-interactions",
     ],
-    staticDirs: ['../src/shared/ui/assets/**/*'],
+    staticDirs: ['../src/shared/ui/assets'],
     framework: {
         name: "@storybook/react-webpack5",
         options: {

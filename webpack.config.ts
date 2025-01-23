@@ -6,6 +6,8 @@ import {TypescriptRule} from "./config/webpack/rules/TypescriptRule";
 import {HtmlPlugin} from "./config/webpack/plugins/HtmlPlugin";
 import {CssPlugin} from "./config/webpack/plugins/CssPlugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import {FontRule} from "./config/webpack/rules/FontRule";
+import {ImageRule} from "./config/webpack/rules/ImageRule";
 
 interface WebpackEnvironment {
     mode: webpack.Configuration['mode'],
@@ -31,7 +33,9 @@ export default (env: Partial<WebpackEnvironment>): webpack.Configuration => {
         module: {
             rules: [
                 StyleRule,
-                TypescriptRule
+                TypescriptRule,
+                FontRule,
+                ImageRule
             ],
         },
         resolve: {
