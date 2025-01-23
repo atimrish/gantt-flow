@@ -5,4 +5,9 @@
     --gray: #909090;
     --light-gray: #DADADA;
     --white: #FBFCFC;
+    --red: #E75A62;
+}
+
+:global * {
+    box-sizing: border-box;
 }

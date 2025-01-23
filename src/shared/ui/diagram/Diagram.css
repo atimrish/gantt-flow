@@ -1,0 +1,9 @@
+.circle {
+    stroke: var(--red);
+    stroke-width: 10px;
+    transition: 100ms all ease-in-out;
+}
+
+.svg {
+    transform: rotate(-90deg);
+}
