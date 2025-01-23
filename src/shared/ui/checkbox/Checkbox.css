@@ -1,5 +1,45 @@
-.checkbox_container {
+.label {
     width: 16px;
     height: 16px;
-    background-color: black;
+    display: block;
+
+    & input[type="checkbox"] {
+        display: none;
+
+        &:checked ~ .checkbox_container {
+            background-color: var(--blue);
+
+            & .mark {
+                display: block;
+            }
+        }
+
+        &:not(:checked) ~ .checkbox_container {
+            border: 1px solid var(--light-gray);
+        }
+    }
+}
+
+.checkbox_container {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+    transition: 100ms all ease-in-out;
+}
+
+.mark {
+    position: absolute;
+    width: 10px;
+    height: 8px;
+    top: 4px;
+    left: 3px;
+    object-fit: contain;
+    object-position: center;
+    display: none;
+
+    &::selection {
+        display: none;
+    }
 }
