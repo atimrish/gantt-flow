@@ -1,0 +1,27 @@
+.container {
+    width: 291px;
+    height: 59px;
+    background-color: var(--white);
+    transition: 100ms all ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
+
+    & > * {
+        font-size: 14px!important;
+
+        &:last-child {
+            font-weight: 700;
+            margin-left: 10px;
+        }
+    }
+
+    &:hover {
+        background-color: var(--light-gray);
+    }
+}
+
+.diagram {
+    margin-left: auto;
+}
