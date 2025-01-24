@@ -1,0 +1,118 @@
+.container {
+    width: 176px;
+    border-radius: 10px;
+    background-color: var(--white);
+    border: 1px solid var(--light-gray);
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.17);
+
+    &::selection {
+        display: none;
+    }
+
+    & > *:last-child div {
+        color: var(--red);
+    }
+}
+
+.font_size {
+    font-size: 14px !important;
+}
+
+.top_block {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    border-bottom: 1px solid var(--light-gray);
+    padding: 14px 14px 12px 14px;
+    cursor: pointer;
+}
+
+.bottom_block {
+    padding: 12px 14px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    transition: 100ms all ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--light-gray);
+    }
+
+    &:last-child {
+        border-radius: 0 0 10px 10px;
+    }
+}
+
+.next_icon {
+    width: 6px;
+    height: 12px;
+    object-position: center;
+    object-fit: contain;
+    margin-left: auto;
+}
+
+.submenu_trigger {
+    position: relative;
+
+    &:hover .submenu {
+        display: block;
+    }
+}
+
+.submenu {
+    left: 100%;
+    top: 0;
+    position: absolute;
+    padding: 14px;
+    border-radius: 10px;
+    background-color: var(--white);
+    border: 1px solid var(--light-gray);
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.17);
+    overflow: hidden;
+    display: none;
+    transition: 100ms all ease-in-out;
+}
+
+.color_picker {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 6px;
+}
+
+.circle {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: var(--red);
+    cursor: pointer;
+}
+
+.progress_picker {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 4px;
+}
+
+.progress {
+    width: 50px;
+    font-size: 14px !important;
+    justify-self: center;
+    padding: 4px;
+    border: 1px solid var(--light-gray);
+    border-radius: 5px;
+    color: var(--gray) !important;
+    transition: 100ms all ease-in-out;
+    text-align: center;
+    cursor: pointer;
+
+    &:hover {
+        color: var(--white) !important;
+        background-color: var(--black);
+        border-color: var(--black);
+    }
+
+    &::selection {
+        display: none;
+    }
+}
