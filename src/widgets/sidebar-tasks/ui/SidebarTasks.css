@@ -1,0 +1,60 @@
+.container {
+    width: 291px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white);
+}
+
+.top_block {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar_heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px;
+    flex-shrink: 0;
+}
+
+.project_title {
+    padding: 0 14px;
+    flex-shrink: 0;
+}
+
+.button {
+    border: none;
+    height: 59px;
+    margin-top: auto;
+    flex-shrink: 0;
+    background-color: var(--white);
+    transition: 100ms all ease-in-out;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    gap: 20px;
+    cursor: pointer;
+
+    & > * {
+        font-size: 18px!important;
+    }
+
+    &:hover {
+        background-color: var(--black);
+
+        & * {
+            stroke: var(--white);
+            fill: var(--white);
+            color: var(--white) !important;
+        }
+    }
+}
+
+.overflow_block {
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
