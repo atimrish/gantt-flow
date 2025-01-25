@@ -1,5 +1,5 @@
 import * as s from './SidebarTask.css'
-import {Typography} from "@src/shared/ui/typography/Typography";
+import {Typography} from "@src/shared/ui/typography";
 import {Diagram} from "@src/shared/ui/diagram";
 
 type Props = {

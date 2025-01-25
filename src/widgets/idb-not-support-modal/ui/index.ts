@@ -1,0 +1,1 @@
+export {IDBNotSupportModal} from './IDBNotSupportModal'

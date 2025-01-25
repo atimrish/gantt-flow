@@ -1,5 +1,5 @@
 import * as s from './TableTask.css'
-import {Typography} from "@src/shared/ui/typography/Typography";
+import {Typography} from "@src/shared/ui/typography";
 import ButtonIcon from '@src/shared/ui/assets/images/table-task-button.svg'
 
 type Props = {

@@ -1,5 +1,5 @@
 import * as s from './SidebarTasks.css'
-import {Typography} from "@src/shared/ui/typography/Typography";
+import {Typography} from "@src/shared/ui/typography";
 import {SidebarTask} from "@src/shared/ui/sidebar-task";
 
 export const SidebarTasks = () => {

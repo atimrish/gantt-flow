@@ -1,6 +1,6 @@
 import * as s from './ContextMenu.css'
 import {Checkbox} from "@src/shared/ui/checkbox";
-import {Typography} from "@src/shared/ui/typography/Typography";
+import {Typography} from "@src/shared/ui/typography";
 import EditIcon from '@src/shared/ui/assets/images/edit.svg'
 import ColorIcon from '@src/shared/ui/assets/images/color.svg'
 import ProgressIcon from '@src/shared/ui/assets/images/progress.svg'
