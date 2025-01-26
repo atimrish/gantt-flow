@@ -1,0 +1,1 @@
+export {getDateTitle} from './getDateTitle'
