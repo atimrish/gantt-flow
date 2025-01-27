@@ -1,0 +1,1 @@
+export {TASK_TABLE_NAME} from './config'
