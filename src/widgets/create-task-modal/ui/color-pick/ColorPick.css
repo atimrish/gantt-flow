@@ -1,0 +1,17 @@
+.color_label {
+    & input {
+        display: none;
+
+        &:checked ~ .color_input {
+            border-color: var(--black);
+        }
+    }
+}
+
+.color_input {
+    transition: 200ms all ease-in-out;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 5px solid currentColor;
+}

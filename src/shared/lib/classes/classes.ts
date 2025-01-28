@@ -1,1 +1,1 @@
-export const classes = (...args: string[]) => args.join(' ')
+export const classes = (...args: (string | undefined)[]) => args.filter(Boolean).join(' ')

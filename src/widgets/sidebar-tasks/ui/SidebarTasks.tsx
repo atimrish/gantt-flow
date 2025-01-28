@@ -1,12 +1,22 @@
 import * as s from './SidebarTasks.css'
 import {Typography} from "@src/shared/ui/typography";
 import {SidebarTask} from "@src/shared/ui/sidebar-task";
+import {observer} from "mobx-react";
+import {useRootContext} from "@src/app/providers/rootProvider";
+import {useEffect} from "react";
+import {createTask} from "@src/entities/task/api/createTask";
 
-export const SidebarTasks = () => {
+export const SidebarTasks = observer(() => {
+    const {task} = useRootContext()
+
+    useEffect(() => {
+        task.fetch()
+    }, []);
+
     return (
         <div className={s.container}>
             <div className={s.top_block}>
-                <Typography.Heading className={s.project_title}>Название проетка</Typography.Heading>
+                <Typography.Heading className={s.project_title}>Название проекта</Typography.Heading>
 
                 <div className={s.sidebar_heading}>
                     <Typography.Text>Задача</Typography.Text>
@@ -14,17 +24,16 @@ export const SidebarTasks = () => {
                 </div>
 
                 <div className={s.overflow_block}>
-                    <SidebarTask taskName={'Название задачи'} percent={67}/>
-                    <SidebarTask taskName={'Название задачи'} percent={67}/>
-                    <SidebarTask taskName={'Название задачи'} percent={67}/>
-                    <SidebarTask taskName={'Название задачи'} percent={67}/>
-                    <SidebarTask taskName={'Название задачи'} percent={67}/>
-                    <SidebarTask taskName={'Название задачи'} percent={67}/>
-                    <SidebarTask taskName={'Название задачи'} percent={67}/>
-                    <SidebarTask taskName={'Название задачи'} percent={67}/>
-                    <SidebarTask taskName={'Название задачи'} percent={67}/>
-                    <SidebarTask taskName={'Название задачи'} percent={67}/>
-                    <SidebarTask taskName={'Название задачи'} percent={67}/>
+                    {
+                        task.tasks.map(i => (
+                            <SidebarTask
+                                taskName={i.name}
+                                percent={i.progress}
+                                key={i.id.toString()}
+                            />
+                        ))
+                    }
+
                 </div>
             </div>
             <button className={s.button}>
@@ -56,4 +65,4 @@ export const SidebarTasks = () => {
             </button>
         </div>
     );
-};
+})

@@ -7,7 +7,7 @@ import ProgressIcon from '@src/shared/ui/assets/images/progress.svg'
 import DeleteIcon from '@src/shared/ui/assets/images/delete.svg'
 import NextIcon from '@src/shared/ui/assets/images/next.svg'
 import {classes} from "@src/shared/lib/classes";
-import {colors} from '@src/widgets/context-menu/config'
+import {colors} from '@src/shared/config'
 
 export const ContextMenu = () => {
     return (

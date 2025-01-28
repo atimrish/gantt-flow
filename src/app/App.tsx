@@ -1,10 +1,12 @@
-import {Checkbox} from "@src/shared/ui/checkbox";
+import {GanttPage} from "@src/pages/gantt/ui/GanttPage";
+import {StrictMode} from "react";
 
 export const App = () => {
     return (
-        <div>
-            Hello World!
-            <Checkbox/>
-        </div>
+        <>
+            <StrictMode>
+                <GanttPage/>
+            </StrictMode>
+        </>
     );
 };

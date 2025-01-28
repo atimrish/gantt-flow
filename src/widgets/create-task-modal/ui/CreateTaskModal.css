@@ -1,0 +1,24 @@
+.dates {
+    display: flex;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.textarea {
+    width: 100%;
+}
+
+.text_input {
+    width: 100%;
+}
+
+.label {
+    margin: 12px 0;
+}
+
+.color_container {
+    display: flex;
+    margin: 12px 0;
+    gap: 16px;
+    padding: 10px 0;
+}

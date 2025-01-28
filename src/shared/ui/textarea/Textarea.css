@@ -1,0 +1,9 @@
+.textarea {
+    min-width: 260px;
+    font-size: 18px;
+    color: var(--black);
+    border-radius: 10px;
+    resize: vertical;
+    border: 1px solid var(--gray);
+    padding: 12px 16px;
+}

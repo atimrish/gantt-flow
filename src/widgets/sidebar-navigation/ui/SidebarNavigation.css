@@ -1,21 +1,22 @@
 .container {
-    width: 80px;
+    width: 60px;
     height: 100vh;
     display: flex;
     flex-direction: column;
+    box-shadow: 6px 0 10px 0 rgba(0, 0, 0, 0.17);
 }
 
 .logo {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     flex-shrink: 0;
     background-color: var(--white);
     display: grid;
     place-items: center;
 
     & img {
-        width: 64px;
-        height: 41px;
+        width: 80%;
+        aspect-ratio: 61 / 41;
         object-fit: contain;
         object-position: center;
     }

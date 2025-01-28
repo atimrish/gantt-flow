@@ -3,12 +3,12 @@ import {PropsWithChildren} from "react";
 import * as s from './Modal.css'
 import CrossIcon from '@src/shared/ui/assets/images/cross.svg'
 
-type Props = {
+export type ModalProps = {
     open: boolean,
     close: () => void,
 }
 
-export const Modal = (p: PropsWithChildren<Props>) => {
+export const Modal = (p: PropsWithChildren<ModalProps>) => {
     return p.open && createPortal((
         <>
             <div

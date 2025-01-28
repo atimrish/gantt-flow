@@ -22,6 +22,7 @@ const config: StorybookConfig = {
         },
     },
     swc: () => ({
+        $schema: "https://swc.rs/schema.json",
         jsc: {
             transform: {
                 react: {

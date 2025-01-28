@@ -20,6 +20,11 @@
     font-family: var(--open-sans), sans-serif;
 }
 
+:global body {
+    margin: 0;
+    padding: 0;
+}
+
 :global #modal-portal {
     position: fixed;
     width: 0;
