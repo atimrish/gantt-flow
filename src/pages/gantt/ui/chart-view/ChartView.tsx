@@ -10,6 +10,7 @@ import {getChartDate} from "@src/pages/gantt/lib/get-chart-date";
 import {setChartElementsOffset} from "@src/pages/gantt/lib/set-chart-elements-offset";
 import {getChartRightDates} from "@src/pages/gantt/lib/get-chart-right-dates";
 import {getChartLeftDates} from "@src/pages/gantt/lib/get-chart-left-dates";
+import {useThrottle} from "@src/shared/lib/use-throttle";
 
 type ChartDates = Array<ChartDate>
 
@@ -44,6 +45,8 @@ export const ChartView = () => {
             }
         }
     }
+
+    const throttledMove = useThrottle(handleMove, 15)
 
     useEffect(() => {
         if (viewRef.current && headRef.current && chartRef.current) {
@@ -103,7 +106,7 @@ export const ChartView = () => {
                     isMouseDown = false
                     moveX = 0
                 }}
-                onMouseMove={handleMove}
+                onMouseMove={throttledMove}
             >
                 {
                     dates.map((i) => <ChartColumn key={i.dateString}/>)
