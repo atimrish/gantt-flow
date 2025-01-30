@@ -36,7 +36,6 @@ export const SidebarTasks = observer(() => {
                                 />
                             ))
                         }
-
                     </div>
                 </div>
                 <button

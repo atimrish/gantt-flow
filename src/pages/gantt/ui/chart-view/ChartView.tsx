@@ -5,18 +5,16 @@ import {ChartColumn} from "@src/pages/gantt/ui/chart-column";
 import {useEffect, useRef, useState} from "react";
 import {columnWidth} from "@src/pages/gantt/config";
 import {getDefaultDate} from "@src/pages/gantt/lib/get-default-date";
-import {Weekdays} from "@src/shared/model/types";
-import {getWeekday} from "@src/shared/lib/get-weekday";
-import {splitDate} from "@src/widgets/create-task-modal/lib/split-date";
+import {ChartDate} from "@src/pages/gantt/model/types";
+import {getChartDate} from "@src/pages/gantt/lib/get-chart-date";
+import {setChartElementsOffset} from "@src/pages/gantt/lib/set-chart-elements-offset";
+import {getChartRightDates} from "@src/pages/gantt/lib/get-chart-right-dates";
+import {getChartLeftDates} from "@src/pages/gantt/lib/get-chart-left-dates";
 
-type ChartDates = Array<{
-    date: number
-    dateString: string
-    weekday: Weekdays,
-    currentDate: boolean
-}>
+type ChartDates = Array<ChartDate>
 
-const defaultOffsetX = columnWidth * -6
+const outerColumnsCount = 6
+const defaultOffsetX = columnWidth * -outerColumnsCount
 
 export const ChartView = () => {
     const viewRef = useRef<HTMLDivElement>(null);
@@ -33,41 +31,16 @@ export const ChartView = () => {
     const handleMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         if (isMouseDown && headRef.current && chartRef.current) {
             const newOffsetX = offsetX - moveX + e.clientX
-            headRef.current.style.transform = `translate(${newOffsetX}px, 0px)`
-            chartRef.current.style.transform = `translate(${newOffsetX}px, 0px)`
+            setChartElementsOffset(headRef.current, chartRef.current, newOffsetX)
 
             //движение вправо
-            if (newOffsetX <= -12 * columnWidth) {
-                const lastDate = splitDate(dates[dates.length - 1].dateString)
-                for (let i = 0; i < 6; i++) {
-                    lastDate.setDate(lastDate.getDate() + 1)
-                    dates.push({
-                        date: lastDate.getDate(),
-                        dateString: lastDate.toLocaleDateString(),
-                        weekday: getWeekday(lastDate),
-                        currentDate: nowString === lastDate.toLocaleDateString(),
-                    })
-                    dates.shift()
-                }
-
-                setDates([...dates])
+            if (newOffsetX <= (outerColumnsCount * -2) * columnWidth) {
+                setDates([...getChartRightDates(dates, outerColumnsCount, nowString)])
             }
 
             //движение влево
             if (newOffsetX >= 0) {
-                const firstDate = splitDate(dates[0].dateString)
-                for (let i = 0; i < 6; i++) {
-                    firstDate.setDate(firstDate.getDate() -1)
-                    dates.unshift({
-                        date: firstDate.getDate(),
-                        dateString: firstDate.toLocaleDateString(),
-                        weekday: getWeekday(firstDate),
-                        currentDate: nowString === firstDate.toLocaleDateString(),
-                    })
-                    dates.pop()
-                }
-
-                setDates([...dates])
+                setDates([...getChartLeftDates(dates, outerColumnsCount, nowString)])
             }
         }
     }
@@ -75,30 +48,23 @@ export const ChartView = () => {
     useEffect(() => {
         if (viewRef.current && headRef.current && chartRef.current) {
             const {width} = viewRef.current.getBoundingClientRect()
-            const colsCount = Math.ceil(width / columnWidth) + 12
+            const colsCount = Math.ceil(width / columnWidth) + (outerColumnsCount * 2)
             const newDates: ChartDates = []
-            const leftDate = getDefaultDate()
+            const leftDate = getDefaultDate(outerColumnsCount)
 
             for (let i = 0; i <= colsCount; i++) {
-                newDates.push({
-                    date: leftDate.getDate(),
-                    dateString: leftDate.toLocaleDateString(),
-                    weekday: getWeekday(leftDate),
-                    currentDate: nowString === leftDate.toLocaleDateString(),
-                })
+                newDates.push(getChartDate(nowString, leftDate))
                 leftDate.setDate(leftDate.getDate() + 1)
             }
 
-            headRef.current.style.transform = `translate(${offsetX}px, 0px)`
-            chartRef.current.style.transform = `translate(${offsetX}px, 0px)`
+            setChartElementsOffset(headRef.current, chartRef.current, offsetX)
             setDates(newDates)
         }
     }, []);
 
     useEffect(() => {
         if (headRef.current && chartRef.current) {
-            headRef.current.style.transform = `translate(${defaultOffsetX}px, 0px)`
-            chartRef.current.style.transform = `translate(${defaultOffsetX}px, 0px)`
+            setChartElementsOffset(headRef.current, chartRef.current, defaultOffsetX)
         }
     }, [dates]);
 
@@ -140,7 +106,7 @@ export const ChartView = () => {
                 onMouseMove={handleMove}
             >
                 {
-                    dates.map((i) => (<ChartColumn key={i.dateString}/>))
+                    dates.map((i) => <ChartColumn key={i.dateString}/>)
                 }
             </div>
         </div>

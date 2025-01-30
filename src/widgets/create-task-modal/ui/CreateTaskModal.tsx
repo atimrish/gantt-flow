@@ -94,7 +94,6 @@ export const CreateTaskModal = (p: ModalProps) => {
 
                 <div>
                     <Typography.Text className={s.label}>Цвет</Typography.Text>
-
                     <div className={s.color_container}>
                         {
                             Object.values(colors).map(i => (
@@ -108,11 +107,8 @@ export const CreateTaskModal = (p: ModalProps) => {
                         }
                     </div>
                 </div>
-
                 <Button>Добавить</Button>
             </form>
-
-
         </Modal>
     );
 };
