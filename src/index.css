@@ -31,6 +31,8 @@
     height: 0;
     display: grid;
     place-items: center;
+    top: 0;
+    left: 0;
 
     &:has(> *) {
         width: 100vw;

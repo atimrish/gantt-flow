@@ -1,12 +1,13 @@
 import * as s from './TableHeadElement.css'
+import {Weekdays} from "@src/shared/model/types";
 
-type Props = {
+export type TableHeadElementProps = {
     current: boolean,
-    day: 'ПН' | 'ВТ' | 'СР' | 'ЧТ' | 'ПТ' | 'СБ' | 'ВС',
+    day: Weekdays,
     date: number
 }
 
-export const TableHeadElement = (p: Props) => {
+export const TableHeadElement = (p: TableHeadElementProps) => {
     return (
         <div
             className={s.container}

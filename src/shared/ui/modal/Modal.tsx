@@ -1,5 +1,5 @@
 import {createPortal} from "react-dom";
-import {PropsWithChildren} from "react";
+import {PropsWithChildren, useRef} from "react";
 import * as s from './Modal.css'
 import CrossIcon from '@src/shared/ui/assets/images/cross.svg'
 
@@ -9,17 +9,38 @@ export type ModalProps = {
 }
 
 export const Modal = (p: PropsWithChildren<ModalProps>) => {
+    const containerRef = useRef<HTMLDivElement>(null)
+    const backdropRef = useRef<HTMLDivElement>(null)
+
+    const handleClick = () => {
+        containerRef.current?.classList.add(s.fade_out)
+        backdropRef.current?.classList.add(s.fade_out)
+        const timeCall = performance.now()
+        const timeWait = () => {
+            if (performance.now() - timeCall >= 300) {
+                p.close()
+            } else {
+                requestAnimationFrame(timeWait)
+            }
+        }
+        requestAnimationFrame(timeWait)
+    }
+
     return p.open && createPortal((
         <>
             <div
                 className={s.backdrop}
-                onClick={() => p.close()}
+                onClick={handleClick}
+                ref={backdropRef}
             />
-            <div className={s.container}>
+            <div
+                className={s.container}
+                ref={containerRef}
+            >
                 <div className={s.modal_head}>
                     <button
                         className={s.close_button}
-                        onClick={() => p.close()}
+                        onClick={handleClick}
                     >
                         <img src={CrossIcon} alt=""/>
                     </button>

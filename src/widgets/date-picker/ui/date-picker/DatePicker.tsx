@@ -12,7 +12,7 @@ export const DatePicker = (p: Props) => {
     const [currentMonth, setCurrentMonth] = useState(new Date().getMonth())
     const dates = getMonthDates(currentMonth)
     const now = new Date()
-    now.setMonth(currentMonth)
+    now.setMonth(currentMonth, 1)
 
     return (
         <div className={s.container}>
@@ -21,12 +21,14 @@ export const DatePicker = (p: Props) => {
                 <button
                     className={classes(s.top_button, s.rotated_image)}
                     onClick={() => setCurrentMonth(prev => prev - 1)}
+                    type="button"
                 >
                     <NextIcon/>
                 </button>
                 <button
                     className={s.top_button}
                     onClick={() => setCurrentMonth(prev => prev + 1)}
+                    type="button"
                 >
                     <NextIcon/>
                 </button>

@@ -21,6 +21,7 @@ export const CalendarDate = (p: Props) => {
             className={s.container}
             data-current-day={p.currentDay}
             onClick={onClickHandler}
+            type="button"
         >
             <Typography.Text className={currentClass}>
                 {p.date}

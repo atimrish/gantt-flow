@@ -3,6 +3,7 @@
     box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.17);
     border-radius: 15px;
     padding: 20px 24px 32px 24px;
+    background-color: var(--white);
 }
 
 .top_text {

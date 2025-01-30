@@ -1,0 +1,6 @@
+.column {
+    width: 96px;
+    height: 100%;
+    border-left: 1px solid var(--gray);
+    border-right: 1px solid var(--gray);
+}

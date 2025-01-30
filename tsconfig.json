@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "./dist/",
-    "target": "ES6",
+    "target": "ESNext",
     "module": "ESNext",
     "jsx": "react-jsx",
     "forceConsistentCasingInFileNames": true,

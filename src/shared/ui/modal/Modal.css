@@ -7,7 +7,17 @@
     background-color: var(--light-gray);
     opacity: 0.4;
     z-index: -1;
-    transition: opacity 0.3s ease-out;
+    transition: opacity 300ms ease-out;
+    animation: show_backdrop 0.6s forwards ease-in-out;
+}
+
+@keyframes show_backdrop {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 0.4;
+    }
 }
 
 .container {
@@ -16,6 +26,7 @@
     border: 1px solid var(--light-gray);
     background-color: var(--white);
     box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.17);
+    animation: fade_in 300ms forwards ease-in-out;
 }
 
 .modal_head {
@@ -37,5 +48,24 @@
         height: 100%;
         object-fit: contain;
         object-position: center;
+    }
+}
+
+.fade_out {
+    animation: fade_out_modal 300ms forwards ease-in-out;
+}
+
+@keyframes fade_in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fade_out_modal {
+    to {
+        opacity: 0;
     }
 }

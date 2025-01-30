@@ -11,7 +11,7 @@ export type TMonthDates = Array<{
 export const getMonthDates = (currentMonth: number): TMonthDates => {
     const now = new Date()
     const currentDate = now.toDateString()
-    now.setMonth(currentMonth)
+    now.setMonth(currentMonth, 1)
     const start = getMonthStartDate(now)
     const end = getMonthEndDate(now)
     const dates: TMonthDates = []

@@ -1,0 +1,1 @@
+export {splitDate} from './splitDate'
