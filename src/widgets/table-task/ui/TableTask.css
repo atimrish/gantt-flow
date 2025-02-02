@@ -4,12 +4,17 @@
     background-color: var(--white);
     border-radius: 30px;
     overflow: hidden;
+    transition: 50ms linear width;
 
     &::before {
         content: '';
         position: absolute;
         inset: 0;
         background-color: rgba(231, 90, 98, 0.6);
+    }
+
+    & * {
+        user-select: none;
     }
 }
 

@@ -3,6 +3,7 @@
     height: 100%;
     border-left: 1px solid var(--gray);
     border-right: 1px solid var(--gray);
+    user-select: none;
 
     &::selection {
         display: none;

@@ -6,6 +6,6 @@ type Props = {
 
 export const ChartColumn = (p: Props) => {
     return (
-        <div className={s.column} data-date-string={p.dateString} />
+        <div className={s.column} data-date-string={p.dateString} draggable="false" />
     );
 };

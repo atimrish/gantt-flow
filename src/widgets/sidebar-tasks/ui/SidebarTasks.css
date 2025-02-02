@@ -5,6 +5,7 @@
     flex-direction: column;
     background-color: var(--white);
     box-shadow: 6px 0 10px 0 rgba(0, 0, 0, 0.17);
+    flex-shrink: 0;
 }
 
 .top_block {

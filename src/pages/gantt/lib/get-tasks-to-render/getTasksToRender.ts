@@ -7,10 +7,8 @@ export const getTasksToRender = (tasks: Task[], dates: ChartDate[]): Array<TaskT
     const tasksToRender: Array<TaskToRender> = []
 
     tasks.forEach(i => {
-        const start = i.start.toLocaleDateString()
-        const end = i.end.toLocaleDateString()
-        const elemStart = document.querySelector<HTMLDivElement>(`[data-date-string="${start}"]`)
-        const elemEnd = document.querySelector<HTMLDivElement>(`[data-date-string="${end}"]`)
+        const elemStart = document.querySelector<HTMLDivElement>(`[data-date-string="${i.start}"]`)
+        const elemEnd = document.querySelector<HTMLDivElement>(`[data-date-string="${i.end}"]`)
 
         //если обе даты отображены в таблице
         if (elemStart && elemEnd) {
@@ -30,24 +28,24 @@ export const getTasksToRender = (tasks: Task[], dates: ChartDate[]): Array<TaskT
                 id: i.id,
                 progress: i.progress,
                 taskName: i.name,
-                left: elemStart.offsetLeft - columnWidth,
+                left: elemStart.offsetLeft,
                 width: elemEnd.offsetLeft - elemStart.offsetLeft + columnWidth,
             })
             return
         }
 
         const leftDate = splitDate(dates[0].dateString) //краняя левая дата
-
         const dayMillis = 1000 * 60  * 60 * 24
-        const totalDiff = Math.floor((+i.end - +i.start) / dayMillis)
-
-        const leftDiff = Math.floor((+i.start - +leftDate) / dayMillis)
+        const startDate = splitDate(i.start)
+        const endDate = splitDate(i.end)
+        const totalDiff = Math.floor((+endDate - +startDate) / dayMillis)
+        const leftDiff = Math.floor((+startDate - +leftDate) / dayMillis)
 
         tasksToRender.push({
             id: i.id,
             progress: i.progress,
             taskName: i.name,
-            left: (leftDiff - 1) * columnWidth,
+            left: (leftDiff) * columnWidth,
             width: (totalDiff + 1) * columnWidth,
         })
 

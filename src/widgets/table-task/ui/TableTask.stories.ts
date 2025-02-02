@@ -12,7 +12,6 @@ type Story = StoryObj<typeof TableTask>
 
 export const Default: Story = {
     args: {
-        percent: 30,
-        taskName: 'Какое-то название'
+        id: 1
     }
 }

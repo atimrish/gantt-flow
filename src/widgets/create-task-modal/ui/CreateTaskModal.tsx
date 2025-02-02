@@ -27,12 +27,10 @@ export const CreateTaskModal = (p: ModalProps) => {
 
     const submitHandler = async (e: FormEvent) => {
         e.preventDefault()
-        const startDate = splitDate(formState.start)
-        const endDate = splitDate(formState.end)
 
         const addingData: CreateTaskData = {
-            start: startDate,
-            end: endDate,
+            start: formState.start,
+            end: formState.end,
             name: formState.name,
             description: formState.description,
             color: formState.color,

@@ -12,7 +12,8 @@ type Props = {
 }
 export const ChartTasks = observer((p: Props) => {
     const {task} = useRootContext()
-    const [tasksToRender, setTasksToRender] = useState<TaskToRender[]>([])
+    const [tasksToRender, setTasksToRender] =
+        useState<TaskToRender[]>(getTasksToRender(task.tasks, p.dates))
 
     useEffect(() => {
         if (p.dates.length > 0) {
@@ -39,7 +40,7 @@ export const ChartTasks = observer((p: Props) => {
                         }}
                         key={i.taskName}
                     >
-                        <TableTask taskName={i.taskName} percent={i.progress}/>
+                        <TableTask id={i.id}/>
                     </div>
                 ))
             }

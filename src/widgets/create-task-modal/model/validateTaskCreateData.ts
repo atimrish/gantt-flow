@@ -1,10 +1,14 @@
 import {CreateTaskData} from "@src/entities/task/api/createTask";
 import {getAllTasks} from "@src/entities/task/api/getAllTasks";
+import {splitDate} from "@src/widgets/create-task-modal/lib/split-date";
 
 export const validateTaskCreateData = async (data: CreateTaskData): Promise<void> | never => {
     const tasks = await getAllTasks()
 
-    if (data.name === '' || isNaN(data.start.getTime()) || isNaN(data.end.getTime())) {
+    const startDate  = splitDate(data.start)
+    const endDate  = splitDate(data.end)
+
+    if (data.name === '' || isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
         throw new Error('Заполните все поля')
     }
 
