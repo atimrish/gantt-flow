@@ -6,3 +6,11 @@ export type ChartDate = {
     weekday: Weekdays,
     currentDate: boolean
 }
+
+export type TaskToRender = {
+    id: IDBValidKey,
+    taskName: string,
+    progress: number,
+    left: number,
+    width: number,
+}

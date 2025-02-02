@@ -1,9 +1,8 @@
 import * as s from './ChartView.css'
 import {Typography} from "@src/shared/ui/typography";
 import {TableHeadElement} from "@src/shared/ui/table-head-element/TableHeadElement";
-import {ChartColumn} from "@src/pages/gantt/ui/chart-column";
 import {useEffect, useRef, useState} from "react";
-import {columnWidth} from "@src/pages/gantt/config";
+import {columnWidth, outerColumnsCount} from "@src/pages/gantt/config";
 import {getDefaultDate} from "@src/pages/gantt/lib/get-default-date";
 import {ChartDate} from "@src/pages/gantt/model/types";
 import {getChartDate} from "@src/pages/gantt/lib/get-chart-date";
@@ -11,10 +10,9 @@ import {setChartElementsOffset} from "@src/pages/gantt/lib/set-chart-elements-of
 import {getChartRightDates} from "@src/pages/gantt/lib/get-chart-right-dates";
 import {getChartLeftDates} from "@src/pages/gantt/lib/get-chart-left-dates";
 import {useThrottle} from "@src/shared/lib/use-throttle";
+import {ChartTasks} from "@src/pages/gantt/ui/chart-tasks";
 
 type ChartDates = Array<ChartDate>
-
-const outerColumnsCount = 6
 const defaultOffsetX = columnWidth * -outerColumnsCount
 
 export const ChartView = () => {
@@ -47,6 +45,16 @@ export const ChartView = () => {
     }
 
     const throttledMove = useThrottle(handleMove, 15)
+
+    const handleMouseDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        isMouseDown = true
+        moveX = e.clientX
+    }
+
+    const handleMouseUp = () => {
+        isMouseDown = false
+        moveX = 0
+    }
 
     useEffect(() => {
         if (viewRef.current && headRef.current && chartRef.current) {
@@ -98,19 +106,11 @@ export const ChartView = () => {
             <div
                 className={s.chart_body}
                 ref={chartRef}
-                onMouseDown={(e) => {
-                    isMouseDown = true
-                    moveX = e.clientX
-                }}
-                onMouseUp={() => {
-                    isMouseDown = false
-                    moveX = 0
-                }}
+                onMouseDown={handleMouseDown}
+                onMouseUp={handleMouseUp}
                 onMouseMove={throttledMove}
             >
-                {
-                    dates.map((i) => <ChartColumn key={i.dateString}/>)
-                }
+                <ChartTasks dates={dates} />
             </div>
         </div>
     );

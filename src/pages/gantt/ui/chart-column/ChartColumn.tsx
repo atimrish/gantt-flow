@@ -1,7 +1,11 @@
 import * as s from './ChartColumn.css'
 
-export const ChartColumn = () => {
+type Props = {
+    dateString: string
+}
+
+export const ChartColumn = (p: Props) => {
     return (
-        <div className={s.column} />
+        <div className={s.column} data-date-string={p.dateString} />
     );
 };

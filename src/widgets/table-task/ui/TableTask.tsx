@@ -11,13 +11,25 @@ export const TableTask = (p: Props) => {
         <div className={s.container}>
             <div
                 className={s.percent_back}
-                style={{width:`${p.percent}%`}}
+                style={{width: `${p.percent}%`}}
             />
             <div className={s.content}>
-                <img src={ButtonIcon} alt=""/>
+                <img
+                    src={ButtonIcon}
+                    alt=""
+                    onMouseDown={(e) => {
+                        e.stopPropagation()
+                    }}
+                />
                 <Typography.Text className={s.text}>{p.taskName}</Typography.Text>
                 <Typography.Text className={s.text}>{p.percent}%</Typography.Text>
-                <img src={ButtonIcon} alt=""/>
+                <img
+                    src={ButtonIcon}
+                    alt=""
+                    onMouseDown={(e) => {
+                        e.stopPropagation()
+                    }}
+                />
             </div>
         </div>
     );
