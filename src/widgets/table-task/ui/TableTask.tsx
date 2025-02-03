@@ -20,6 +20,11 @@ export const TableTask = observer((p: Props) => {
     let initWidth = 0
     let initLeft = 0
 
+    const mutationObserver = new MutationObserver((mutations) => {
+        const targetElem = mutations[0].target as HTMLDivElement
+        initLeft = +targetElem.style.left.replaceAll('px', '')
+    })
+
     const updateDate = async (x: number, y: number, key: 'start' | 'end') => {
         const targetElem = document.elementsFromPoint(x, y).find(i => {
             return Boolean(i.attributes.getNamedItem('data-date-string'))
@@ -36,6 +41,9 @@ export const TableTask = observer((p: Props) => {
 
     const handleMouseUpLeft = (e: MouseEvent) => {
         startMoveX = 0
+        initWidth = 0
+        initLeft = 0
+
         updateDate(e.clientX, e.clientY, 'start')
         document.removeEventListener('mouseup', handleMouseUpLeft)
         document.removeEventListener('mousemove', handleMoveLeft)
@@ -43,6 +51,8 @@ export const TableTask = observer((p: Props) => {
 
     const handleMouseUpRight = (e: MouseEvent) => {
         startMoveX = 0
+        initWidth = 0
+        initLeft = 0
         updateDate(e.clientX, e.clientY, 'end')
         document.removeEventListener('mouseup', handleMouseUpRight)
         document.removeEventListener('mousemove', handleMoveRight)
@@ -57,14 +67,15 @@ export const TableTask = observer((p: Props) => {
     }, 100)
 
     const handleMoveRight = useThrottle((e: MouseEvent) => {
-        if (containerRef.current) {
-            containerRef.current.style.width = initWidth + e.clientX - startMoveX + 'px'
+        if (parentRef.current) {
+            parentRef.current.style.width = initWidth + e.clientX - startMoveX + 'px'
         }
     }, 100)
 
     const handleMouseDownLeft = (e: React.MouseEvent) => {
         e.stopPropagation()
         if (e.button === 0) {
+            mutationObserver.disconnect()
             startMoveX = e.clientX
             document.addEventListener('mouseup', handleMouseUpLeft)
             document.addEventListener('mousemove', handleMoveLeft)
@@ -87,11 +98,13 @@ export const TableTask = observer((p: Props) => {
             const parent = node.parentNode as HTMLDivElement
             initLeft = parent.offsetLeft
             parentRef.current = parent
+            mutationObserver.observe(parent, {attributes: true})
         } else {
             document.removeEventListener('mouseup', handleMouseUpRight)
             document.removeEventListener('mousemove', handleMoveRight)
             document.removeEventListener('mouseup', handleMouseUpLeft)
             document.removeEventListener('mousemove', handleMoveLeft)
+            mutationObserver.disconnect()
         }
     }
 
