@@ -64,16 +64,20 @@ export const TableTask = observer((p: Props) => {
 
     const handleMouseDownLeft = (e: React.MouseEvent) => {
         e.stopPropagation()
-        startMoveX = e.clientX
-        document.addEventListener('mouseup', handleMouseUpLeft)
-        document.addEventListener('mousemove', handleMoveLeft)
+        if (e.button === 0) {
+            startMoveX = e.clientX
+            document.addEventListener('mouseup', handleMouseUpLeft)
+            document.addEventListener('mousemove', handleMoveLeft)
+        }
     }
 
     const handleMouseDownRight = (e: React.MouseEvent) => {
         e.stopPropagation()
-        startMoveX = e.clientX
-        document.addEventListener('mouseup', handleMouseUpRight)
-        document.addEventListener('mousemove', handleMoveRight)
+        if (e.button === 0) {
+            startMoveX = e.clientX
+            document.addEventListener('mouseup', handleMouseUpRight)
+            document.addEventListener('mousemove', handleMoveRight)
+        }
     }
 
     const callbackRef = (node: HTMLDivElement) => {

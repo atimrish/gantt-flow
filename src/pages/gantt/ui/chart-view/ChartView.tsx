@@ -47,8 +47,11 @@ export const ChartView = () => {
     const throttledMove = useThrottle(handleMove, 15)
 
     const handleMouseDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        isMouseDown = true
-        moveX = e.clientX
+        //отлавливаем только левую кнопку мыши
+        if (e.button === 0) {
+            isMouseDown = true
+            moveX = e.clientX
+        }
     }
 
     const handleMouseUp = () => {
