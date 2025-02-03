@@ -4,7 +4,7 @@ import {getAllTasks} from "@src/entities/task/api/getAllTasks";
 import {createTask, CreateTaskData} from "@src/entities/task/api/createTask";
 
 export class TaskStore {
-    tasks: Task[] = []
+    tasks: Record<string, Task> = {}
 
     constructor() {
         makeAutoObservable(this)
@@ -13,7 +13,9 @@ export class TaskStore {
     async fetch() {
         const tasks = await getAllTasks()
         runInAction(() => {
-            this.tasks = tasks
+            tasks.forEach((task) => {
+                this.tasks[task.id.toString()] = task
+            })
         })
     }
 

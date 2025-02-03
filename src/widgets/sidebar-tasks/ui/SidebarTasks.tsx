@@ -28,7 +28,7 @@ export const SidebarTasks = observer(() => {
 
                     <div className={s.overflow_block}>
                         {
-                            task.tasks.map(i => (
+                            Object.values(task.tasks).map(i => (
                                 <SidebarTask
                                     taskName={i.name}
                                     percent={i.progress}

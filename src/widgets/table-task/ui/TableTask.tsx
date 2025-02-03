@@ -1,18 +1,23 @@
 import * as s from './TableTask.css'
 import {Typography} from "@src/shared/ui/typography";
 import ButtonIcon from '@src/shared/ui/assets/images/table-task-button.svg'
-import {useRef} from "react";
+import {useRef, useState} from "react";
 import {observer} from "mobx-react";
 import {useRootContext} from "@src/app/providers/rootProvider";
 import {updateTask} from "@src/entities/task/api/updateTask";
 import {useThrottle} from "@src/shared/lib/use-throttle";
+import {ContextMenu} from "@src/widgets/context-menu/ui";
 
 type Props = {
     id: IDBValidKey
-};
+}
+
 export const TableTask = observer((p: Props) => {
+    const [contextMenuOpen, setContextMenuOpen] = useState(false)
+    const contextMenuPosition = useRef({ x: 0, y: 0 })
+
     const {task} = useRootContext()
-    const currentTask = task.tasks.find(i => i.id === p.id)
+    const currentTask = task.tasks[p.id.toString()]
     const containerRef = useRef<HTMLDivElement>(null);
     const parentRef = useRef<HTMLDivElement>(null)
 
@@ -112,10 +117,23 @@ export const TableTask = observer((p: Props) => {
         <div
             className={s.container}
             ref={callbackRef}
+            onContextMenu={(e) => {
+                e.preventDefault()
+                contextMenuPosition.current.x = e.clientX
+                contextMenuPosition.current.y = e.clientY
+                setContextMenuOpen(true)
+            }}
         >
             <div
+                className={s.back}
+                style={{backgroundColor: `color-mix(in oklab, ${currentTask.color}, transparent 60%)`}}
+            />
+            <div
                 className={s.percent_back}
-                style={{width: `${currentTask?.progress}%`}}
+                style={{
+                    width: `${currentTask.progress}%`,
+                    backgroundColor: currentTask.color
+                }}
             />
             <div className={s.content}>
                 <img
@@ -124,8 +142,8 @@ export const TableTask = observer((p: Props) => {
                     onMouseDown={handleMouseDownLeft}
                     draggable="false"
                 />
-                <Typography.Text className={s.text}>{currentTask?.name}</Typography.Text>
-                <Typography.Text className={s.text}>{currentTask?.progress}%</Typography.Text>
+                <Typography.Text className={s.text}>{currentTask.name}</Typography.Text>
+                <Typography.Text className={s.text}>{currentTask.progress}%</Typography.Text>
                 <img
                     src={ButtonIcon}
                     alt=""
@@ -133,6 +151,14 @@ export const TableTask = observer((p: Props) => {
                     draggable="false"
                 />
             </div>
+
+            <ContextMenu
+                open={contextMenuOpen}
+                x={contextMenuPosition.current.x}
+                y={contextMenuPosition.current.y}
+                close={() => setContextMenuOpen(false)}
+                id={p.id}
+            />
         </div>
     );
 })

@@ -6,16 +6,14 @@
     overflow: hidden;
     transition: 50ms linear width;
 
-    &::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background-color: rgba(231, 90, 98, 0.6);
-    }
-
     & * {
         user-select: none;
     }
+}
+
+.back {
+    position: absolute;
+    inset: 0;
 }
 
 .text {
@@ -24,7 +22,6 @@
 
 .percent_back {
     height: 100%;
-    background-color: var(--red);
     position: absolute;
     top: 0;
     left: 0;

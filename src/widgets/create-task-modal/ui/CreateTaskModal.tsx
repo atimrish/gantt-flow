@@ -13,8 +13,9 @@ import {useRootContext} from "@src/app/providers/rootProvider";
 import {splitDate} from "@src/widgets/create-task-modal/lib/split-date";
 import {CreateTaskData} from "@src/entities/task/api/createTask";
 import {validateTaskCreateData} from "@src/widgets/create-task-modal/model";
+import {observer} from "mobx-react";
 
-export const CreateTaskModal = (p: ModalProps) => {
+export const CreateTaskModal = observer((p: ModalProps) => {
     const {task} = useRootContext()
 
     const [formState, setFormState] = useState({
@@ -109,4 +110,4 @@ export const CreateTaskModal = (p: ModalProps) => {
             </form>
         </Modal>
     );
-};
+})
