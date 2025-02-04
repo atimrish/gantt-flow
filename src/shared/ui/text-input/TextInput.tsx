@@ -8,15 +8,17 @@ type Props = {
     placeholder?: string
 };
 export const TextInput = (p: Props & HTMLAttributes<HTMLInputElement>) => {
+    const {value, setValue, ...other} = p
+
     return (
-        <div>
+        <div className={s.container}>
             <input
-                {...p}
+                {...other}
                 type="text"
                 className={classes(s.input, p.className)}
-                value={p.value}
+                value={value}
                 placeholder={p.placeholder}
-                onChange={(e) => p.setValue(e.currentTarget.value)}
+                onChange={(e) => setValue(e.currentTarget.value)}
             />
         </div>
     );

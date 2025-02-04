@@ -7,12 +7,16 @@ type Props = {
     setValue: (value: string) => void,
 };
 export const Textarea = (p: Props & HTMLAttributes<HTMLTextAreaElement>) => {
+    const {value, setValue, ...other} = p;
+
     return (
-        <textarea
-            {...p}
-            value={p.value}
-            onChange={e => p.setValue(e.currentTarget.value)}
-            className={classes(s.textarea, p.className)}
-        />
+        <div className={s.container}>
+            <textarea
+                {...other}
+                value={value}
+                onChange={e => setValue(e.currentTarget.value)}
+                className={classes(s.textarea, p.className)}
+            />
+        </div>
     );
 };

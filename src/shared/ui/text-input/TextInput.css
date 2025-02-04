@@ -6,4 +6,23 @@
     color: var(--black);
     border-radius: 10px;
     border: 1px solid var(--gray);
+    outline: none;
+
+    &:invalid {
+        border-color: var(--red);
+    }
+}
+
+.container {
+    position: relative;
+
+    &:focus-within {
+        &::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border: 1px solid var(--blue);
+            border-radius: 12px;
+        }
+    }
 }

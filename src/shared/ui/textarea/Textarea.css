@@ -6,4 +6,19 @@
     resize: vertical;
     border: 1px solid var(--gray);
     padding: 12px 16px;
+    outline: none;
+}
+
+.container {
+    position: relative;
+
+    &:focus-within {
+        &::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border: 1px solid var(--blue);
+            border-radius: 12px;
+        }
+    }
 }
