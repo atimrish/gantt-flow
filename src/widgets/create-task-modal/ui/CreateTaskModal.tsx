@@ -54,13 +54,14 @@ export const CreateTaskModal = observer((p: ModalProps) => {
                                 value: true
                             }
                         }}
-                        render={({field}) => (
+                        render={({field, fieldState}) => (
                             <TextInput
                                 id="task-name-input"
                                 placeholder="Введите..."
                                 value={field.value}
                                 setValue={field.onChange}
                                 className={s.text_input}
+                                invalid={fieldState.invalid}
                             />
                         )}
                     />
@@ -78,10 +79,11 @@ export const CreateTaskModal = observer((p: ModalProps) => {
                                     value: true
                                 }
                             }}
-                            render={({field}) => (
+                            render={({field, fieldState}) => (
                                 <DatePicker
                                     value={field.value}
                                     setValue={field.onChange}
+                                    invalid={fieldState.invalid}
                                 />
                             )}
                         />
@@ -97,10 +99,11 @@ export const CreateTaskModal = observer((p: ModalProps) => {
                                     value: true
                                 }
                             }}
-                            render={({field}) => (
+                            render={({field, fieldState}) => (
                                 <DatePicker
                                     value={field.value}
                                     setValue={field.onChange}
+                                    invalid={fieldState.invalid}
                                 />
                             )}
                         />

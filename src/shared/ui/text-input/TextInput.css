@@ -8,7 +8,7 @@
     border: 1px solid var(--gray);
     outline: none;
 
-    &:invalid {
+    &[data-invalid="true"] {
         border-color: var(--red);
     }
 }

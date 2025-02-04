@@ -1,11 +1,12 @@
 import * as s from './DateInput.css'
 import CalendarIcon from '@src/shared/ui/assets/images/calendar.svg'
 import {DatePicker} from "@src/widgets/date-picker/ui/date-picker";
-import {createContext, useContext, useRef, useState} from "react";
+import {createContext, useContext, useRef} from "react";
 
 type Props = {
     value: string,
     setValue: (value: string) => void,
+    invalid?: boolean
 };
 
 interface IDateInputContext {
@@ -20,14 +21,17 @@ const DateInputContext = createContext<IDateInputContext>({
 
 export const useDateInputContext = () => useContext(DateInputContext)
 
-export const DateInput = ({value, setValue}: Props) => {
+export const DateInput = ({value, setValue, invalid}: Props) => {
     const inputRef = useRef<HTMLInputElement>(null);
 
     return (
         <DateInputContext.Provider
             value={{ value, setValue }}
         >
-            <div className={s.container}>
+            <div
+                className={s.container}
+                data-invalid={invalid}
+            >
                 <div className={s.date_picker_container}>
                     <DatePicker/>
                 </div>
