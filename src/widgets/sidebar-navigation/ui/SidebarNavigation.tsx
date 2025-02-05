@@ -6,23 +6,38 @@ import ProjectIcon from '@src/shared/ui/assets/images/navigation/project.svg'
 import SettingIcon from '@src/shared/ui/assets/images/navigation/settings.svg'
 import TaskIcon from '@src/shared/ui/assets/images/navigation/task.svg'
 import BellIcon from '@src/shared/ui/assets/images/navigation/bell.svg'
+import {Tooltip} from "@src/shared/ui/tooltip";
 
-type Props = {
-
-};
-export const SidebarNavigation = (p: Props) => {
+export const SidebarNavigation = () => {
     return (
         <div className={s.container}>
             <div className={s.logo}>
                 <img src={LogoImage} alt=""/>
             </div>
             <div className={s.navigation}>
-                <img src={HomeIcon} alt=""/>
-                <img src={ProfileIcon} alt=""/>
-                <img src={TaskIcon} alt=""/>
-                <img src={ProjectIcon} alt=""/>
-                <img src={SettingIcon} alt=""/>
-                <img src={BellIcon} alt=""/>
+                <Tooltip title="Домашняя страница (в разработке)">
+                    <img src={HomeIcon} alt=""/>
+                </Tooltip>
+
+                <Tooltip title="Профиль (в разработке)">
+                    <img src={ProfileIcon} alt=""/>
+                </Tooltip>
+
+                <Tooltip title="Задачи (в разработке)">
+                    <img src={TaskIcon} alt=""/>
+                </Tooltip>
+
+                <Tooltip title="Проекты (в разработке)">
+                    <img src={ProjectIcon} alt=""/>
+                </Tooltip>
+
+                <Tooltip title="Настройки (в разработке)">
+                    <img src={SettingIcon} alt=""/>
+                </Tooltip>
+
+                <Tooltip title="Уведомления (в разработке)">
+                    <img src={BellIcon} alt=""/>
+                </Tooltip>
             </div>
         </div>
     );
