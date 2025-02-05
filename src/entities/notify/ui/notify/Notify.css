@@ -1,0 +1,65 @@
+.container {
+    width: 354px;
+    border: 1px solid var(--light-gray);
+    border-radius: 5px;
+    padding: 14px;
+    display: flex;
+    gap: 14px;
+    background-color: var(--white);
+    animation: show 300ms ease-in-out forwards;
+
+    &[data-close="true"] {
+        animation: fade_out 300ms ease-in-out forwards;
+    }
+}
+
+.button {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    object-position: center;
+}
+
+.text_block {
+    margin-right: auto;
+}
+
+.title {
+    font-size: 16px!important;
+    font-weight: 600!important;
+    margin: 5px 0;
+}
+
+.description {
+    font-size: 14px!important;
+}
+
+@keyframes show {
+    from {
+        transform: translateY(80px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fade_out {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}

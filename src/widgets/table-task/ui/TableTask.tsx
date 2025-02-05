@@ -16,7 +16,7 @@ export const TableTask = observer((p: Props) => {
     const [contextMenuOpen, setContextMenuOpen] = useState(false)
     const contextMenuPosition = useRef({ x: 0, y: 0 })
 
-    const {task} = useRootContext()
+    const {task, notify} = useRootContext()
     const currentTask = task.tasks[p.id.toString()]
     const containerRef = useRef<HTMLDivElement>(null);
     const parentRef = useRef<HTMLDivElement>(null)
@@ -41,6 +41,11 @@ export const TableTask = observer((p: Props) => {
             const newEndDate = targetDate.value
             await updateTask({...currentTask, [key]: newEndDate})
             await task.fetch()
+            notify.push({
+                id: performance.now(),
+                type: 'success',
+                title: 'Сроки задачи изменены'
+            })
         }
     }
 

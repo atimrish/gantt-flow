@@ -15,9 +15,9 @@ import {observer} from "mobx-react";
 import {Controller, SubmitErrorHandler, SubmitHandler, useForm} from "react-hook-form";
 
 export const CreateTaskModal = observer((p: ModalProps) => {
-    const {task} = useRootContext()
+    const {task, notify} = useRootContext()
 
-    const {handleSubmit, control} = useForm<ICreateTaskForm>({
+    const {handleSubmit, control, formState} = useForm<ICreateTaskForm>({
         defaultValues: {
             color: colors.red
         }
@@ -33,11 +33,21 @@ export const CreateTaskModal = observer((p: ModalProps) => {
 
         await task.add(addingData)
         await task.fetch()
+        notify.push({
+            id: performance.now(),
+            type: 'success',
+            title: 'Задача создана!'
+        })
         p.close()
     }
 
     const onError: SubmitErrorHandler<ICreateTaskForm> = (errors, e) => {
         e?.preventDefault()
+        notify.push({
+            id: performance.now(),
+            type: 'error',
+            title: 'Ошибки заполнения формы',
+        })
     }
 
     return (
