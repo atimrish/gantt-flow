@@ -50,6 +50,5 @@ export const getTasksToRender = (tasks: Task[], dates: ChartDate[]): Array<TaskT
         })
 
     })
-
     return tasksToRender
 }

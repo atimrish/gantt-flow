@@ -13,13 +13,13 @@ type Props = {
 export const ChartTasks = observer((p: Props) => {
     const {task} = useRootContext()
     const [tasksToRender, setTasksToRender] =
-        useState<TaskToRender[]>(getTasksToRender(Object.values(task.tasks), p.dates))
+        useState<TaskToRender[]>([])
 
     useEffect(() => {
         if (p.dates.length > 0) {
             setTasksToRender(getTasksToRender(Object.values(task.tasks), p.dates))
         }
-    }, [p.dates]);
+    }, [p.dates, task.tasks]);
 
     return (
         <div
