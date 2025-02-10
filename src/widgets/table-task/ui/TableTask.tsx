@@ -17,7 +17,8 @@ export const TableTask = observer((p: Props) => {
     const contextMenuPosition = useRef({ x: 0, y: 0 })
 
     const {task, notify} = useRootContext()
-    const currentTask = task.tasks[p.id.toString()]
+    const currentTask = task.tasks[p.id.toString()] ?? {}
+
     const containerRef = useRef<HTMLDivElement>(null);
     const parentRef = useRef<HTMLDivElement>(null)
 

@@ -1,7 +1,8 @@
-import {makeAutoObservable} from "mobx";
+import {makeAutoObservable, runInAction} from "mobx";
 import {Task} from "@src/entities/task/model/index";
 import {getAllTasks} from "@src/entities/task/api/getAllTasks";
 import {createTask, CreateTaskData} from "@src/entities/task/api/createTask";
+import {deleteTask} from "@src/entities/task/api/deleteTask";
 
 export class TaskStore {
     tasks: Record<string, Task> = {}
@@ -12,16 +13,22 @@ export class TaskStore {
 
     async fetch() {
         const tasks = await getAllTasks()
-        const fetchedTasks: Record<string, Task> = {}
+        const fetchedTasks: typeof this.tasks = {}
 
         tasks.forEach((task) => {
             fetchedTasks[task.id.toString()] = task
         })
 
-        this.tasks = fetchedTasks
+        runInAction(() => {
+            this.tasks = fetchedTasks
+        })
     }
 
     async add(data: CreateTaskData) {
         return await createTask(data)
+    }
+
+    async delete(id: number) {
+        await deleteTask(id)
     }
 }

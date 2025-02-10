@@ -17,7 +17,7 @@ import {Controller, SubmitErrorHandler, SubmitHandler, useForm} from "react-hook
 export const CreateTaskModal = observer((p: ModalProps) => {
     const {task, notify} = useRootContext()
 
-    const {handleSubmit, control, formState} = useForm<ICreateTaskForm>({
+    const {handleSubmit, control, reset, formState} = useForm<ICreateTaskForm>({
         defaultValues: {
             color: colors.red
         }
@@ -38,6 +38,7 @@ export const CreateTaskModal = observer((p: ModalProps) => {
             type: 'success',
             title: 'Задача создана!'
         })
+        reset()
         p.close()
     }
 
@@ -72,6 +73,9 @@ export const CreateTaskModal = observer((p: ModalProps) => {
                                 setValue={field.onChange}
                                 className={s.text_input}
                                 invalid={fieldState.invalid}
+                                ref={(node) => {
+                                    node && p.open && node.focus()
+                                }}
                             />
                         )}
                     />

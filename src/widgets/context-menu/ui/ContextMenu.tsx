@@ -14,7 +14,6 @@ import {observer} from "mobx-react";
 import {useRootContext} from "@src/app/providers/rootProvider";
 import {Task} from "@src/entities/task/model";
 import {updateTask} from "@src/entities/task/api/updateTask";
-import {deleteTask} from "@src/entities/task/api/deleteTask";
 
 type Props = {
     x: number,
@@ -26,7 +25,7 @@ type Props = {
 
 export const ContextMenu = observer((p: Props) => {
     const {task} = useRootContext()
-    const currentTask = task.tasks[p.id.toString()]
+    const currentTask = task.tasks[p.id.toString()] ?? {}
     const progressButtons: ReactNode[] = []
     for (let i = 10; i <= 100; i += 10) {
         progressButtons.push(
@@ -112,7 +111,7 @@ export const ContextMenu = observer((p: Props) => {
                     <div
                         className={s.bottom_block}
                         onClick={async () => {
-                            await deleteTask(p.id)
+                            await task.delete(+p.id)
                             await task.fetch()
                         }}
                     >

@@ -4,8 +4,8 @@ import * as s from './ChartTasks.css'
 import {useRootContext} from "@src/app/providers/rootProvider";
 import {observer} from "mobx-react";
 import {TableTask} from "@src/widgets/table-task/ui";
-import {useEffect, useState} from "react";
 import {getTasksToRender} from "@src/pages/gantt/lib/get-tasks-to-render";
+import {useEffect, useState} from "react";
 
 type Props = {
     dates: Array<ChartDate>
@@ -38,7 +38,7 @@ export const ChartTasks = observer((p: Props) => {
                             height: 59,
                             position: 'absolute'
                         }}
-                        key={i.taskName}
+                        key={i.id.toString()}
                     >
                         <TableTask id={i.id}/>
                     </div>
