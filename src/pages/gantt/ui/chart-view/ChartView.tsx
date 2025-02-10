@@ -11,14 +11,34 @@ import {getChartRightDates} from "@src/pages/gantt/lib/get-chart-right-dates";
 import {getChartLeftDates} from "@src/pages/gantt/lib/get-chart-left-dates";
 import {useThrottle} from "@src/shared/lib/use-throttle";
 import {ChartTasks} from "@src/pages/gantt/ui/chart-tasks";
+import {splitDate} from "@src/widgets/create-task-modal/lib/split-date";
 
 type ChartDates = Array<ChartDate>
 const defaultOffsetX = columnWidth * -outerColumnsCount
+const todayTitle = new Date().toLocaleString('ru-RU', {month: 'long', year: 'numeric' })
 
 export const ChartView = () => {
     const viewRef = useRef<HTMLDivElement>(null);
     const headRef = useRef<HTMLDivElement>(null);
     const chartRef = useRef<HTMLDivElement>(null);
+    const coordinatesRef = useRef<{x: number, y: number}>(null);
+    const headTextRef = useRef<HTMLDivElement>(null);
+
+    const mutationObserver = new MutationObserver(() => {
+        if (coordinatesRef.current && headTextRef.current) {
+            const targetElem =
+                document.elementFromPoint(coordinatesRef.current.x, coordinatesRef.current.y) as HTMLDivElement;
+            const dateString = targetElem.getAttribute('data-date-string')
+
+            if (dateString) {
+                const date = splitDate(dateString)
+                headTextRef.current.innerText = date.toLocaleString('ru-RU', {
+                    month: 'long',
+                    year: 'numeric',
+                })
+            }
+        }
+    })
 
     const nowString = new Date().toLocaleDateString();
     const offsetX = defaultOffsetX
@@ -61,6 +81,8 @@ export const ChartView = () => {
 
     useEffect(() => {
         if (viewRef.current && headRef.current && chartRef.current) {
+            headTextRef.current = viewRef.current.querySelector<HTMLDivElement>('[data-head-text="true"]')
+
             const {width} = viewRef.current.getBoundingClientRect()
             const colsCount = Math.ceil(width / columnWidth) + (outerColumnsCount * 2)
             const newDates: ChartDates = []
@@ -71,8 +93,12 @@ export const ChartView = () => {
                 leftDate.setDate(leftDate.getDate() + 1)
             }
 
+            mutationObserver.observe(headRef.current, {attributes: true})
             setChartElementsOffset(headRef.current, chartRef.current, offsetX)
             setDates(newDates)
+        }
+        return () => {
+            mutationObserver.disconnect()
         }
     }, []);
 
@@ -87,8 +113,19 @@ export const ChartView = () => {
             className={s.container}
             ref={viewRef}
         >
-            <div className={s.chart_heading_block}>
-                <Typography.Text className={s.chart_heading_text}>Январь, 2025</Typography.Text>
+            <div
+                className={s.chart_heading_block}
+                ref={(node) => {
+                    if (node) {
+                        const bounds = node.getBoundingClientRect();
+                        coordinatesRef.current = {x: bounds.x, y: bounds.y + 200}
+                    }
+                }}
+            >
+                <Typography.Text
+                    className={s.chart_heading_text}
+                    data-head-text="true"
+                >{todayTitle}</Typography.Text>
                 <div
                     className={s.chart_heading_dates}
                     ref={headRef}
