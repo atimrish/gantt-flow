@@ -3,7 +3,7 @@ import {getWeekday} from "@src/shared/lib/get-weekday";
 
 export const getChartDate = (nowDateString: string, date: Date): ChartDate => ({
     date: date.getDate(),
-    dateString: date.toLocaleDateString(),
+    dateString: date.toLocaleDateString('ru-RU'),
     weekday: getWeekday(date),
-    currentDate: nowDateString === date.toLocaleDateString(),
+    currentDate: nowDateString === date.toLocaleDateString('ru-RU'),
 })

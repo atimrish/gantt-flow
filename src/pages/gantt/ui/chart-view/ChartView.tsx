@@ -40,7 +40,7 @@ export const ChartView = () => {
         }
     })
 
-    const nowString = new Date().toLocaleDateString();
+    const nowString = new Date().toLocaleDateString('ru-RU');
     const offsetX = defaultOffsetX
     let isMouseDown = false;
     let moveX = 0

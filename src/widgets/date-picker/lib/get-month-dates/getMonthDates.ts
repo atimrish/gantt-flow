@@ -15,7 +15,7 @@ export const getMonthDates = (currentMonth: number): TMonthDates => {
     const start = getMonthStartDate(now)
     const end = getMonthEndDate(now)
     const dates: TMonthDates = []
-    const endDateString = end.toLocaleDateString()
+    const endDateString = end.toLocaleDateString('ru-RU')
     let startDateString = ''
 
     while (startDateString !== endDateString) {
@@ -23,16 +23,16 @@ export const getMonthDates = (currentMonth: number): TMonthDates => {
             date: start.getDate(),
             currentMonth: start.getMonth() === currentMonth,
             currentDate: start.toDateString() === currentDate,
-            dateString: start.toLocaleDateString()
+            dateString: start.toLocaleDateString('ru-RU')
         })
         start.setDate(start.getDate() + 1)
-        startDateString = start.toLocaleDateString()
+        startDateString = start.toLocaleDateString('ru-RU')
     }
     dates.push({
         date: start.getDate(),
         currentMonth: start.getMonth() === currentMonth,
         currentDate: start.toDateString() === currentDate,
-        dateString: start.toLocaleDateString()
+        dateString: start.toLocaleDateString('ru-RU')
     })
     return dates
 }
