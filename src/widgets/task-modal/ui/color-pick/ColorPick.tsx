@@ -1,4 +1,4 @@
-import * as s from "@src/widgets/create-task-modal/ui/color-pick/ColorPick.css";
+import * as s from "@src/widgets/task-modal/ui/color-pick/ColorPick.css";
 import {useId} from "react";
 
 type Props = {

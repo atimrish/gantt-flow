@@ -1,5 +1,5 @@
 import {ChartDate} from "@src/pages/gantt/model/types";
-import {splitDate} from "@src/widgets/create-task-modal/lib/split-date";
+import {splitDate} from "@src/widgets/task-modal/lib/split-date";
 import {getChartDate} from "@src/pages/gantt/lib/get-chart-date";
 
 export const getChartRightDates = (dates: Array<ChartDate>, count :number, nowString: string): Array<ChartDate> => {

@@ -1,7 +1,7 @@
 import {Task} from "@src/entities/task/model";
 import {ChartDate, TaskToRender} from "@src/pages/gantt/model/types";
 import {columnWidth} from "@src/pages/gantt/config";
-import {splitDate} from "@src/widgets/create-task-modal/lib/split-date";
+import {splitDate} from "@src/widgets/task-modal/lib/split-date";
 
 export const getTasksToRender = (tasks: Task[], dates: ChartDate[]): Array<TaskToRender> => {
     const tasksToRender: Array<TaskToRender> = []

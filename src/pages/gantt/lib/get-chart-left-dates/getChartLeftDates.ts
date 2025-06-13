@@ -1,4 +1,4 @@
-import {splitDate} from "@src/widgets/create-task-modal/lib/split-date";
+import {splitDate} from "@src/widgets/task-modal/lib/split-date";
 import {getChartDate} from "@src/pages/gantt/lib/get-chart-date";
 import {ChartDate} from "@src/pages/gantt/model/types";
 

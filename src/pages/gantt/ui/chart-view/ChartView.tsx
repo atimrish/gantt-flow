@@ -11,7 +11,7 @@ import {getChartRightDates} from "@src/pages/gantt/lib/get-chart-right-dates";
 import {getChartLeftDates} from "@src/pages/gantt/lib/get-chart-left-dates";
 import {useThrottle} from "@src/shared/lib/use-throttle";
 import {ChartTasks} from "@src/pages/gantt/ui/chart-tasks";
-import {splitDate} from "@src/widgets/create-task-modal/lib/split-date";
+import {splitDate} from "@src/widgets/task-modal/lib/split-date";
 
 type ChartDates = Array<ChartDate>;
 const defaultOffsetX = columnWidth * -outerColumnsCount;

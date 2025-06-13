@@ -1,4 +1,4 @@
-export interface ICreateTaskForm {
+export interface ITaskForm {
     name: string,
     start: string,
     end: string,
