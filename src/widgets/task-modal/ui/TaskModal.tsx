@@ -17,7 +17,7 @@ import {updateTask} from "@src/entities/task/api/updateTask";
 
 type TaskModalProps = {
 	modal: ModalProps;
-	type?: "create" | "update";
+	type: "create" | "update";
 	fields?: ITaskForm;
 	taskId?: IDBValidKey;
 };

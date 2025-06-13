@@ -38,6 +38,7 @@ export const SidebarTasks = observer(() => {
 				</button>
 			</div>
 			<TaskModal
+                type="create"
 				modal={{
 					open: modalOpen,
 					close: () => setModalOpen(false),
