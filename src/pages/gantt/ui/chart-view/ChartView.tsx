@@ -26,7 +26,7 @@ export const ChartView = () => {
 	const chartRef = useRef<HTMLDivElement>(null);
 	const coordinatesRef = useRef<{x: number; y: number}>(null);
 	const headTextRef = useRef<HTMLDivElement>(null);
-	const isUpdatedDatesRef = useRef<boolean>(false)
+	const isUpdatedDatesRef = useRef<boolean>(false);
 
 	const mutationObserver = new MutationObserver(() => {
 		if (coordinatesRef.current && headTextRef.current) {
@@ -55,8 +55,6 @@ export const ChartView = () => {
 
 	const handleMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
 		if (isMouseDown && headRef.current && chartRef.current) {
-			console.log(mainMoveX);
-
 			const relativeMoveX = e.clientX - startMoveX;
 			const newOffsetX = defaultOffsetX + mainMoveX + relativeMoveX;
 
@@ -65,13 +63,13 @@ export const ChartView = () => {
 			//движение вправо
 			if (newOffsetX <= outerColumnsCount * -2 * columnWidth) {
 				setDates([...getChartRightDates(dates, outerColumnsCount, nowString)]);
-				isUpdatedDatesRef.current = true
+				isUpdatedDatesRef.current = true;
 			}
 
 			//движение влево
 			if (newOffsetX >= 0) {
 				setDates([...getChartLeftDates(dates, outerColumnsCount, nowString)]);
-				isUpdatedDatesRef.current = true
+				isUpdatedDatesRef.current = true;
 			}
 		}
 	};
@@ -88,7 +86,6 @@ export const ChartView = () => {
 
 	const handleMouseUp = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
 		isMouseDown = false;
-
 		if (isUpdatedDatesRef.current) {
 			mainMoveX = 0;
 			isUpdatedDatesRef.current = false;
