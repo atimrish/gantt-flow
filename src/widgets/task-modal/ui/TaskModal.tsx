@@ -1,20 +1,20 @@
+import {useRootContext} from "@src/app/providers/rootProvider";
+import {updateTask} from "@src/entities/task/api/updateTask";
+import {colors} from "@src/shared/config";
+import {Button} from "@src/shared/ui/button";
 import {Modal} from "@src/shared/ui/modal";
 import {ModalProps} from "@src/shared/ui/modal/Modal";
 import {TextInput} from "@src/shared/ui/text-input/TextInput";
+import {Textarea} from "@src/shared/ui/textarea/Textarea";
 import {Typography} from "@src/shared/ui/typography";
 import {DatePicker} from "@src/widgets/date-picker";
-import * as s from "./TaskModal.css";
-import {Textarea} from "@src/shared/ui/textarea/Textarea";
-import {colors} from "@src/shared/config";
-import {Button} from "@src/shared/ui/button";
-import {ColorPick} from "@src/widgets/task-modal/ui/color-pick/ColorPick";
-import {useRootContext} from "@src/app/providers/rootProvider";
-import {CreateTaskData} from "@src/entities/task/api/createTask";
 import {ITaskForm} from "@src/widgets/task-modal/model";
+import {ColorPick} from "@src/widgets/task-modal/ui/color-pick/ColorPick";
 import {observer} from "mobx-react";
 import {Controller, SubmitErrorHandler, SubmitHandler, useForm, ValidationRule} from "react-hook-form";
-import {updateTask} from "@src/entities/task/api/updateTask";
 import {useTranslation} from "react-i18next";
+import * as s from "./TaskModal.css";
+import {splitDate} from "../lib/split-date";
 
 type TaskModalProps = {
 	modal: ModalProps;
@@ -27,7 +27,7 @@ export const TaskModal = observer((p: TaskModalProps) => {
 	const {t} = useTranslation();
 	const {task, notify} = useRootContext();
 
-	const {handleSubmit, control, reset} = useForm<ITaskForm>({
+	const {handleSubmit, control, reset, getValues} = useForm<ITaskForm>({
 		defaultValues: p.type === "update" && p.fields && p.taskId ? p.fields : {color: colors.red},
 	});
 
@@ -35,21 +35,19 @@ export const TaskModal = observer((p: TaskModalProps) => {
 		e?.preventDefault();
 
 		if (p.type === "create") {
-			const addingData: CreateTaskData = {
+			await task.add({
 				...data,
 				progress: 0,
 				completed: false,
-			};
+			});
 
-			await task.add(addingData);
 			notify.push({
 				id: performance.now(),
 				type: "success",
-				title: t('taskForm.notifies.taskCreated'),
+				title: t("taskForm.notifies.taskCreated"),
 			});
 		} else if (p.type === "update" && p.taskId) {
 			const currentTask = task.tasks[+p.taskId];
-
 			await updateTask({
 				id: p.taskId,
 				completed: currentTask.completed,
@@ -57,10 +55,11 @@ export const TaskModal = observer((p: TaskModalProps) => {
 				createdAt: currentTask.createdAt,
 				...data,
 			});
+
 			notify.push({
 				id: performance.now(),
 				type: "success",
-				title: t('taskForm.notifies.taskUpdated'),
+				title: t("taskForm.notifies.taskUpdated"),
 			});
 		}
 
@@ -74,7 +73,7 @@ export const TaskModal = observer((p: TaskModalProps) => {
 		notify.push({
 			id: performance.now(),
 			type: "error",
-			title: t('taskForm.notifies.formError'),
+			title: t("taskForm.notifies.formError"),
 		});
 	};
 
@@ -118,6 +117,18 @@ export const TaskModal = observer((p: TaskModalProps) => {
 							control={control}
 							rules={{
 								required: requiredMessage,
+								validate: (dateString) => {
+									const endDate = getValues("end");
+									console.log(dateString, endDate);
+									
+									if (!dateString || !endDate) {
+										return false;
+									}
+
+									const startDateUnix = Date.parse(splitDate(dateString).toString());
+									const endDateUnix = Date.parse(splitDate(endDate).toString());
+									return endDateUnix >= startDateUnix;
+								},
 							}}
 							render={({field, fieldState}) => (
 								<DatePicker
@@ -135,6 +146,18 @@ export const TaskModal = observer((p: TaskModalProps) => {
 							control={control}
 							rules={{
 								required: requiredMessage,
+								validate: (dateString) => {
+									const startDate = getValues("start");
+									console.log(startDate, dateString);
+
+									if (!dateString || !startDate) {
+										return false;
+									}
+
+									const endDateUnix = Date.parse(splitDate(dateString).toString());
+									const startDateUnix = Date.parse(splitDate(startDate).toString());
+									return endDateUnix >= startDateUnix;
+								},
 							}}
 							render={({field, fieldState}) => (
 								<DatePicker

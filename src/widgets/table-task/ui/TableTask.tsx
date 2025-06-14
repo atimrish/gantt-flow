@@ -1,18 +1,20 @@
-import * as s from "./TableTask.css";
-import {Typography} from "@src/shared/ui/typography";
+import { useRootContext } from "@src/app/providers/rootProvider";
+import { updateTask } from "@src/entities/task/api/updateTask";
+import { useThrottle } from "@src/shared/lib/use-throttle";
 import ButtonIcon from "@src/shared/ui/assets/images/table-task-button.svg";
-import {useRef, useState} from "react";
-import {observer} from "mobx-react";
-import {useRootContext} from "@src/app/providers/rootProvider";
-import {updateTask} from "@src/entities/task/api/updateTask";
-import {useThrottle} from "@src/shared/lib/use-throttle";
-import {ContextMenu} from "@src/widgets/context-menu/ui";
+import { Typography } from "@src/shared/ui/typography";
+import { ContextMenu } from "@src/widgets/context-menu/ui";
+import { observer } from "mobx-react";
+import { useRef, useState } from "react";
+import * as s from "./TableTask.css";
+import {useTranslation} from 'react-i18next'
 
 type Props = {
 	id: IDBValidKey;
 };
 
 export const TableTask = observer((p: Props) => {
+	const {t} = useTranslation()
 	const [contextMenuOpen, setContextMenuOpen] = useState(false);
 	const contextMenuPosition = useRef({x: 0, y: 0});
 
@@ -39,19 +41,22 @@ export const TableTask = observer((p: Props) => {
 		if (targetElem && currentTask) {
 			//обновить
 			const targetDate = targetElem.attributes.getNamedItem("data-date-string")!;
-			const newEndDate = targetDate.value;
-			await updateTask({...currentTask, [key]: newEndDate});
+			const newDate = targetDate.value;
+			await updateTask({...currentTask, [key]: newDate});
 			await task.fetch();
 			notify.push({
 				id: performance.now(),
 				type: "success",
-				title: "Сроки задачи изменены",
+				title: t('taskForm.notifies.taskDatesUpdate'),
 			});
 		}
 	};
 
 	const handleMouseUpLeft = (e: MouseEvent) => {
-        e.stopPropagation()
+		e.stopPropagation();
+
+		
+
 		startMoveX = 0;
 		initWidth = 0;
 		initLeft = 0;
@@ -61,7 +66,7 @@ export const TableTask = observer((p: Props) => {
 	};
 
 	const handleMouseUpRight = (e: MouseEvent) => {
-        e.stopPropagation()
+		e.stopPropagation();
 		startMoveX = 0;
 		initWidth = 0;
 		initLeft = 0;

@@ -44,7 +44,8 @@
         "notifies": {
             "taskCreated": "Задача создана!",
             "taskUpdated": "Задача обновлена!",
-            "formError": "Ошибки заполнения формы"
+            "formError": "Ошибки заполнения формы",
+            "taskDatesUpdate": "Сроки задачи изменены"
         }
 	}
 }

@@ -44,7 +44,8 @@
         "notifies": {
             "taskCreated": "Task created!",
             "taskUpdated": "Task updated!",
-            "formError": "Form filling errors"
+            "formError": "Form filling errors",
+			"taskDatesUpdate": "The task dates have been changed"
         }
 	}
 }
