@@ -12,8 +12,9 @@ import {useRootContext} from "@src/app/providers/rootProvider";
 import {CreateTaskData} from "@src/entities/task/api/createTask";
 import {ITaskForm} from "@src/widgets/task-modal/model";
 import {observer} from "mobx-react";
-import {Controller, SubmitErrorHandler, SubmitHandler, useForm} from "react-hook-form";
+import {Controller, SubmitErrorHandler, SubmitHandler, useForm, ValidationRule} from "react-hook-form";
 import {updateTask} from "@src/entities/task/api/updateTask";
+import {useTranslation} from "react-i18next";
 
 type TaskModalProps = {
 	modal: ModalProps;
@@ -23,6 +24,7 @@ type TaskModalProps = {
 };
 
 export const TaskModal = observer((p: TaskModalProps) => {
+	const {t} = useTranslation();
 	const {task, notify} = useRootContext();
 
 	const {handleSubmit, control, reset} = useForm<ITaskForm>({
@@ -43,7 +45,7 @@ export const TaskModal = observer((p: TaskModalProps) => {
 			notify.push({
 				id: performance.now(),
 				type: "success",
-				title: "Задача создана!",
+				title: t('taskForm.notifies.taskCreated'),
 			});
 		} else if (p.type === "update" && p.taskId) {
 			const currentTask = task.tasks[+p.taskId];
@@ -58,7 +60,7 @@ export const TaskModal = observer((p: TaskModalProps) => {
 			notify.push({
 				id: performance.now(),
 				type: "success",
-				title: "Задача обновлена!",
+				title: t('taskForm.notifies.taskUpdated'),
 			});
 		}
 
@@ -72,28 +74,30 @@ export const TaskModal = observer((p: TaskModalProps) => {
 		notify.push({
 			id: performance.now(),
 			type: "error",
-			title: "Ошибки заполнения формы",
+			title: t('taskForm.notifies.formError'),
 		});
+	};
+
+	const requiredMessage: ValidationRule<boolean> = {
+		message: t("taskForm.messages.required"),
+		value: true,
 	};
 
 	return (
 		<Modal close={p.modal.close} open={p.modal.open}>
 			<form action="#" onSubmit={handleSubmit(onSubmit, onError)}>
 				<label htmlFor="task-name-input">
-					<Typography.Text className={s.label}>Название задачи</Typography.Text>
+					<Typography.Text className={s.label}>{t("taskForm.title")}</Typography.Text>
 					<Controller
 						name={"name"}
 						control={control}
 						rules={{
-							required: {
-								message: "Это поле обязательно к заполнению",
-								value: true,
-							},
+							required: requiredMessage,
 						}}
 						render={({field, fieldState}) => (
 							<TextInput
 								id="task-name-input"
-								placeholder="Введите..."
+								placeholder={t("taskForm.inputPlaceholder")}
 								value={field.value}
 								setValue={field.onChange}
 								className={s.text_input}
@@ -108,15 +112,12 @@ export const TaskModal = observer((p: TaskModalProps) => {
 
 				<div className={s.dates}>
 					<div>
-						<Typography.Text className={s.label}>Начало</Typography.Text>
+						<Typography.Text className={s.label}>{t("taskForm.start")}</Typography.Text>
 						<Controller
 							name={"start"}
 							control={control}
 							rules={{
-								required: {
-									message: "Это поле обязательно к заполнению",
-									value: true,
-								},
+								required: requiredMessage,
 							}}
 							render={({field, fieldState}) => (
 								<DatePicker
@@ -128,15 +129,12 @@ export const TaskModal = observer((p: TaskModalProps) => {
 						/>
 					</div>
 					<div>
-						<Typography.Text className={s.label}>Конец</Typography.Text>
+						<Typography.Text className={s.label}>{t("taskForm.end")}</Typography.Text>
 						<Controller
 							name={"end"}
 							control={control}
 							rules={{
-								required: {
-									message: "Это поле обязательно к заполнению",
-									value: true,
-								},
+								required: requiredMessage,
 							}}
 							render={({field, fieldState}) => (
 								<DatePicker
@@ -150,7 +148,7 @@ export const TaskModal = observer((p: TaskModalProps) => {
 				</div>
 
 				<label htmlFor="task-description-input">
-					<Typography.Text className={s.label}>Описание</Typography.Text>
+					<Typography.Text className={s.label}>{t("taskForm.description")}</Typography.Text>
 					<Controller
 						name={"description"}
 						control={control}
@@ -166,7 +164,7 @@ export const TaskModal = observer((p: TaskModalProps) => {
 				</label>
 
 				<div>
-					<Typography.Text className={s.label}>Цвет</Typography.Text>
+					<Typography.Text className={s.label}>{t("taskForm.color")}</Typography.Text>
 					<div className={s.color_container}>
 						<Controller
 							name={"color"}
@@ -186,7 +184,7 @@ export const TaskModal = observer((p: TaskModalProps) => {
 						/>
 					</div>
 				</div>
-				<Button>Добавить</Button>
+				<Button>{t("taskForm.submitButton." + p.type)}</Button>
 			</form>
 		</Modal>
 	);

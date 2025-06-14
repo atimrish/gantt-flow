@@ -1,1 +1,1 @@
-export type Weekdays = 'ПН' | 'ВТ' | 'СР' | 'ЧТ' | 'ПТ' | 'СБ' | 'ВС'
+export type Weekdays = 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun'

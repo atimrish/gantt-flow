@@ -1,0 +1,50 @@
+{
+	"projectTitle": "Project Title",
+	"task": "Task",
+	"progress": "Progress",
+	"weekdays": {
+		"mon": "Mon",
+		"tue": "Tue",
+		"wed": "Wed",
+		"thu": "Thu",
+		"fri": "Fri",
+		"sat": "Sat",
+		"sun": "Sun"
+	},
+	"sidebarTooltip": {
+		"home": "Homepage (coming soon)",
+		"profile": "Profile (coming soon)",
+		"tasks": "Tasks page (coming soon)",
+		"projects": "Projects page (coming soon)",
+		"settings": "Settings (coming soon)",
+		"notifies": "Notifies (coming soon)"
+	},
+	"newTaskButton": "New task",
+	"contextMenu": {
+		"completed": "Completed",
+		"edit": "Edit",
+		"color": "Color",
+		"progress": "Progress",
+		"delete": "Delete"
+	},
+	"taskForm": {
+		"title": "Task title",
+		"start": "Start",
+		"end": "End",
+		"description": "Description",
+		"color": "Color",
+        "inputPlaceholder": "Input...",
+        "submitButton": {
+            "create": "Create",
+            "update": "Save"
+        },
+        "messages": {
+            "required": "This field is required"
+        },
+        "notifies": {
+            "taskCreated": "Task created!",
+            "taskUpdated": "Task updated!",
+            "formError": "Form filling errors"
+        }
+	}
+}

@@ -15,6 +15,7 @@ import {useRootContext} from "@src/app/providers/rootProvider";
 import {Task} from "@src/entities/task/model";
 import {updateTask} from "@src/entities/task/api/updateTask";
 import {TaskModal} from "@src/widgets/task-modal/ui";
+import {useTranslation} from "react-i18next"
 
 type Props = {
 	x: number;
@@ -25,9 +26,10 @@ type Props = {
 };
 
 export const ContextMenu = observer((p: Props) => {
+	const {t} = useTranslation()
 	const {task} = useRootContext();
 	const [updateModalOpen, setUpdateModalOpen] = useState(false);
-	const currentTask = task.tasks[p.id.toString()];
+	const currentTask = task.tasks[p.id.toString()] ?? {};
 	const progressButtons: ReactNode[] = [];
 	for (let i = 10; i <= 100; i += 10) {
 		progressButtons.push(
@@ -71,7 +73,7 @@ export const ContextMenu = observer((p: Props) => {
 								await task.fetch();
 							}}
 						/>
-						<Typography.Text className={s.font_size}>Выполнено</Typography.Text>
+						<Typography.Text className={s.font_size}>{t('contextMenu.completed')}</Typography.Text>
 					</div>
 
 					<div className={s.bottom_block} onClick={() => setUpdateModalOpen(true)}>
@@ -94,12 +96,12 @@ export const ContextMenu = observer((p: Props) => {
 							taskId={p.id}
 						/>
 						<img src={EditIcon} alt="" />
-						<Typography.Text className={s.font_size}>Редактировать</Typography.Text>
+						<Typography.Text className={s.font_size}>{t('contextMenu.edit')}</Typography.Text>
 					</div>
 
 					<div className={classes(s.bottom_block, s.submenu_trigger)}>
 						<img src={ColorIcon} alt="" />
-						<Typography.Text className={s.font_size}>Цвет</Typography.Text>
+						<Typography.Text className={s.font_size}>{t('contextMenu.color')}</Typography.Text>
 						<img className={s.next_icon} src={NextIcon} alt="" />
 
 						<div className={s.submenu}>
@@ -118,7 +120,7 @@ export const ContextMenu = observer((p: Props) => {
 
 					<div className={classes(s.bottom_block, s.submenu_trigger)}>
 						<img src={ProgressIcon} alt="" />
-						<Typography.Text className={s.font_size}>Прогресс</Typography.Text>
+						<Typography.Text className={s.font_size}>{t('contextMenu.progress')}</Typography.Text>
 						<img className={s.next_icon} src={NextIcon} alt="" />
 
 						<div className={s.submenu}>
@@ -133,7 +135,7 @@ export const ContextMenu = observer((p: Props) => {
 							await task.fetch();
 						}}>
 						<img src={DeleteIcon} alt="" />
-						<Typography.Text className={s.font_size}>Удалить</Typography.Text>
+						<Typography.Text className={s.font_size}>{t('contextMenu.delete')}</Typography.Text>
 					</div>
 				</div>
 			</div>,

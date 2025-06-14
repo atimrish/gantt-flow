@@ -6,8 +6,10 @@ import {useRootContext} from "@src/app/providers/rootProvider";
 import {useEffect, useState} from "react";
 import {PlusIcon} from "@src/pages/gantt/ui/plus-icon/PlusIcon";
 import {TaskModal} from "@src/widgets/task-modal/ui";
+import {useTranslation} from "react-i18next"
 
 export const SidebarTasks = observer(() => {
+	const {t} = useTranslation()
 	const {task} = useRootContext();
 	const [modalOpen, setModalOpen] = useState(false);
 
@@ -19,11 +21,11 @@ export const SidebarTasks = observer(() => {
 		<>
 			<div className={s.container}>
 				<div className={s.top_block}>
-					<Typography.Heading className={s.project_title}>Название проекта</Typography.Heading>
+					<Typography.Heading className={s.project_title}>{t('projectTitle')}</Typography.Heading>
 
 					<div className={s.sidebar_heading}>
-						<Typography.Text>Задача</Typography.Text>
-						<Typography.Text>Прогресс</Typography.Text>
+						<Typography.Text>{t('task')}</Typography.Text>
+						<Typography.Text>{t('progress')}</Typography.Text>
 					</div>
 
 					<div className={s.overflow_block}>
@@ -34,7 +36,7 @@ export const SidebarTasks = observer(() => {
 				</div>
 				<button className={s.button} onClick={() => setModalOpen(true)}>
 					<PlusIcon />
-					<Typography.Text>Новая задача</Typography.Text>
+					<Typography.Text>{t('newTaskButton')}</Typography.Text>
 				</button>
 			</div>
 			<TaskModal

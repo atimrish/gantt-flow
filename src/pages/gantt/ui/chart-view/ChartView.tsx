@@ -12,10 +12,13 @@ import {getChartLeftDates} from "@src/pages/gantt/lib/get-chart-left-dates";
 import {useThrottle} from "@src/shared/lib/use-throttle";
 import {ChartTasks} from "@src/pages/gantt/ui/chart-tasks";
 import {splitDate} from "@src/widgets/task-modal/lib/split-date";
+import i18n from "@src/app/i18n/i18n";
+import {Dropdown} from "@src/widgets/dropdown";
+import {useDropdown} from "@src/widgets/dropdown/lib/useDropdown";
 
 type ChartDates = Array<ChartDate>;
 const defaultOffsetX = columnWidth * -outerColumnsCount;
-const todayTitle = new Date().toLocaleString("ru-RU", {
+const todayTitle = new Date().toLocaleString(i18n.language, {
 	month: "long",
 	year: "numeric",
 });
@@ -38,7 +41,7 @@ export const ChartView = () => {
 
 			if (dateString) {
 				const date = splitDate(dateString);
-				headTextRef.current.innerText = date.toLocaleString("ru-RU", {
+				headTextRef.current.innerText = date.toLocaleString(i18n.language, {
 					month: "long",
 					year: "numeric",
 				});
@@ -104,6 +107,11 @@ export const ChartView = () => {
 			const colsCount = Math.ceil(width / columnWidth) + outerColumnsCount * 2;
 			const newDates: ChartDates = [];
 			const leftDate = getDefaultDate(outerColumnsCount);
+			{
+				dates.map((i) => (
+					<TableHeadElement current={i.currentDate} day={i.weekday} date={i.date} key={i.dateString} />
+				));
+			}
 
 			for (let i = 0; i <= colsCount; i++) {
 				newDates.push(getChartDate(nowString, leftDate));
@@ -125,22 +133,39 @@ export const ChartView = () => {
 		}
 	}, [dates]);
 
+	const chartHeadingCallbackRef = (node: HTMLDivElement | null) => {
+		if (node) {
+			const bounds = node.getBoundingClientRect();
+			coordinatesRef.current = {
+				x: bounds.x,
+				y: bounds.y + 200,
+			};
+		}
+	};
+
+	const dropdownState = useDropdown([
+		{
+			node: "EN",
+			value: "en",
+		},
+		{
+			node: "RU",
+			value: "ru",
+		},
+	]);
+
+	i18n.changeLanguage(dropdownState.options[dropdownState.selectedId].value)
+
 	return (
 		<div className={s.container} ref={viewRef}>
-			<div
-				className={s.chart_heading_block}
-				ref={(node) => {
-					if (node) {
-						const bounds = node.getBoundingClientRect();
-						coordinatesRef.current = {
-							x: bounds.x,
-							y: bounds.y + 200,
-						};
-					}
-				}}>
-				<Typography.Text className={s.chart_heading_text} data-head-text="true">
-					{todayTitle}
-				</Typography.Text>
+			<div className={s.chart_heading_block} ref={chartHeadingCallbackRef}>
+				<div className={s.chart_top_heading_block}>
+					<Typography.Text className={s.chart_heading_text} data-head-text="true">
+						{todayTitle}
+					</Typography.Text>
+
+					<Dropdown {...dropdownState} />
+				</div>
 				<div className={s.chart_heading_dates} ref={headRef}>
 					{dates.map((i) => (
 						<TableHeadElement current={i.currentDate} day={i.weekday} date={i.date} key={i.dateString} />

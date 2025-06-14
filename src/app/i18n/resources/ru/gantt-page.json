@@ -1,0 +1,50 @@
+{
+    "projectTitle": "Название проекта",
+    "task": "Задача",
+    "progress": "Прогресс",
+    "weekdays": {
+        "mon": "Пн",
+        "tue": "Вт",
+        "wed": "Ср",
+        "thu": "Чт",
+        "fri": "Пт",
+        "sat": "Сб",
+        "sun": "Вс"
+    },
+    "sidebarTooltip": {
+        "home": "Домашняя страница (в разработке)",
+        "profile": "Профиль (в разработке)",
+        "tasks": "Задачи (в разработке)",
+        "projects": "Проекты (в разработке)",
+        "settings": "Настройки (в разработке)",
+        "notifies": "Уведомления (в разработке)"
+    },
+    "newTaskButton": "Новая задача",
+    "contextMenu": {
+        "completed": "Выполнено",
+        "edit": "Редактировать",
+        "color": "Цвет",
+        "progress": "Прогресс",
+        "delete": "Удалить"
+    },
+    "taskForm": {
+		"title": "Название задачи",
+		"start": "Начало",
+		"end": "Конец",
+		"description": "Описание",
+		"color": "Цвет",
+        "inputPlaceholder": "Введите...",
+        "submitButton": {
+            "create": "Create",
+            "update": "Save"
+        },
+        "messages": {
+            "required": "Это поле обязательно к заполнению"
+        },
+        "notifies": {
+            "taskCreated": "Задача создана!",
+            "taskUpdated": "Задача обновлена!",
+            "formError": "Ошибки заполнения формы"
+        }
+	}
+}

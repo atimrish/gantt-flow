@@ -16,6 +16,7 @@ const preview: Preview = {
                 <>
                     <Story {...options} />
                     <div id="modal-portal"></div>
+                    <div id="dropdown-portal"></div>
                 </>
             )
         }

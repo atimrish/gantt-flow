@@ -13,7 +13,7 @@ type Story = StoryObj<typeof TableHeadElement>
 export const Default: Story = {
     args: {
         current: false,
-        day: 'ПН',
+        day: 'mon',
         date: 18
     }
 }

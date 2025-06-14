@@ -2,6 +2,6 @@ import {Weekdays} from "@src/shared/model/types";
 
 export const getWeekday = (date: Date): Weekdays =>
     date.toLocaleDateString(
-        'ru-RU',
+        'en-En',
         {weekday: 'short'}
-    ).toUpperCase() as Weekdays
+    ).toLowerCase() as Weekdays
