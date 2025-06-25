@@ -1,5 +1,5 @@
 import { useRootContext } from "@src/app/providers/rootProvider";
-import { updateTask } from "@src/entities/task/api/updateTask";
+import { updateTask } from "@src/features/task/api/updateTask";
 import { useThrottle } from "@src/shared/lib/use-throttle";
 import ButtonIcon from "@src/shared/ui/assets/images/table-task-button.svg";
 import { Typography } from "@src/shared/ui/typography";

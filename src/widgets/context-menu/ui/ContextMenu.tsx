@@ -13,7 +13,7 @@ import {ReactNode, useEffect, useState} from "react";
 import {observer} from "mobx-react";
 import {useRootContext} from "@src/app/providers/rootProvider";
 import {Task} from "@src/entities/task/model";
-import {updateTask} from "@src/entities/task/api/updateTask";
+import {updateTask} from "@src/features/task/api/updateTask";
 import {TaskModal} from "@src/widgets/task-modal/ui";
 import {useTranslation} from "react-i18next"
 

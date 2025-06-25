@@ -1,8 +1,8 @@
 import {makeAutoObservable, runInAction} from "mobx";
 import {Task} from "@src/entities/task/model/index";
-import {getAllTasks} from "@src/entities/task/api/getAllTasks";
-import {createTask, CreateTaskData} from "@src/entities/task/api/createTask";
-import {deleteTask} from "@src/entities/task/api/deleteTask";
+import {getAllTasks} from "@src/features/task/api/getAllTasks";
+import {createTask, CreateTaskData} from "@src/features/task/api/createTask";
+import {deleteTask} from "@src/features/task/api/deleteTask";
 
 export class TaskStore {
     tasks: Record<string, Task> = {}

@@ -1,5 +1,5 @@
 import {useRootContext} from "@src/app/providers/rootProvider";
-import {updateTask} from "@src/entities/task/api/updateTask";
+import {updateTask} from "@src/features/task/api/updateTask";
 import {colors} from "@src/shared/config";
 import {Button} from "@src/shared/ui/button";
 import {Modal} from "@src/shared/ui/modal";

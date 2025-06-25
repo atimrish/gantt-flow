@@ -1,4 +1,4 @@
-import {TaskStore} from "@src/entities/task/model";
+import {TaskStore} from "@src/features/task/model";
 import {NotifyStore} from "@src/entities/notify/model";
 
 export class RootStore {
