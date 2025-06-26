@@ -1,4 +1,4 @@
-import {HTMLAttributes, ReactNode} from "react";
+import {forwardRef, HTMLAttributes, ReactNode, Ref} from "react";
 import * as s from './Typography.css'
 
 type HeadingProps = {
@@ -35,18 +35,18 @@ const Paragraph = (p: HTMLAttributes<HTMLParagraphElement>) => {
     return <p {...p} className={classNames}>{p.children}</p>
 }
 
-const Text = (p: TextProps & HTMLAttributes<HTMLElement>) => {
+const Text = forwardRef((p: TextProps & HTMLAttributes<HTMLElement>, ref: Ref<HTMLDivElement>) => {
     let classNames = s.text
     if (p.className) {
         classNames += ' ' + p.className
     }
 
     const elems: Record<NonNullable<TextProps["as"]>, ReactNode> =  {
-        'div': <div {...p} className={classNames}>{p.children}</div>,
-        'span': <span {...p} className={classNames}>{p.children}</span>,
+        'div': <div {...p} ref={ref} className={classNames}>{p.children}</div>,
+        'span': <span {...p} ref={ref} className={classNames}>{p.children}</span>,
     }
     return elems[p.as || 'div']
-}
+})
 
 const Link = (p: HTMLAttributes<HTMLAnchorElement>) => {
     let classNames = s.text

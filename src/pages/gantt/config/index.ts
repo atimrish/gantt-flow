@@ -1,2 +1,3 @@
-export const columnWidth = 96
-export const outerColumnsCount = 6
+export const COLUMN_WIDTH = 96
+export const OUTER_COLUMN_COUNT = 6
+export const DEFAULT_OFFSET_X = COLUMN_WIDTH * -OUTER_COLUMN_COUNT;

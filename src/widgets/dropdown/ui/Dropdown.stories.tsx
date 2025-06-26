@@ -23,7 +23,6 @@ export const Default: Story = {
 				value: 2,
 			},
 		]);
-		console.log(dropdownState);
 
 		return <Dropdown {...dropdownState} />;
 	},

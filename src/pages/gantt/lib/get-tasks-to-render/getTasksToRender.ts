@@ -1,6 +1,6 @@
 import {Task} from "@src/entities/task/model";
 import {ChartDate, TaskToRender} from "@src/pages/gantt/model/types";
-import {columnWidth} from "@src/pages/gantt/config";
+import {COLUMN_WIDTH} from "@src/pages/gantt/config";
 import {splitDate} from "@src/widgets/task-modal/lib/split-date";
 
 export const getTasksToRender = (tasks: Task[], dates: ChartDate[]): Array<TaskToRender> => {
@@ -19,7 +19,7 @@ export const getTasksToRender = (tasks: Task[], dates: ChartDate[]): Array<TaskT
                     progress: i.progress,
                     taskName: i.name,
                     left: elemStart.offsetLeft,
-                    width: columnWidth,
+                    width: COLUMN_WIDTH,
                 })
                 return
             }
@@ -29,7 +29,7 @@ export const getTasksToRender = (tasks: Task[], dates: ChartDate[]): Array<TaskT
                 progress: i.progress,
                 taskName: i.name,
                 left: elemStart.offsetLeft,
-                width: elemEnd.offsetLeft - elemStart.offsetLeft + columnWidth,
+                width: elemEnd.offsetLeft - elemStart.offsetLeft + COLUMN_WIDTH,
             })
             return
         }
@@ -45,8 +45,8 @@ export const getTasksToRender = (tasks: Task[], dates: ChartDate[]): Array<TaskT
             id: i.id,
             progress: i.progress,
             taskName: i.name,
-            left: (leftDiff) * columnWidth,
-            width: (totalDiff + 1) * columnWidth,
+            left: (leftDiff) * COLUMN_WIDTH,
+            width: (totalDiff + 1) * COLUMN_WIDTH,
         })
 
     })

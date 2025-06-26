@@ -119,7 +119,6 @@ export const TaskModal = observer((p: TaskModalProps) => {
 								required: requiredMessage,
 								validate: (dateString) => {
 									const endDate = getValues("end");
-									console.log(dateString, endDate);
 									
 									if (!dateString || !endDate) {
 										return false;
@@ -148,7 +147,6 @@ export const TaskModal = observer((p: TaskModalProps) => {
 								required: requiredMessage,
 								validate: (dateString) => {
 									const startDate = getValues("start");
-									console.log(startDate, dateString);
 
 									if (!dateString || !startDate) {
 										return false;

@@ -1,0 +1,26 @@
+.chart_heading_block {
+    height: 132px;
+    width: 100%;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.17);
+}
+
+.chart_heading_text {
+    color: var(--gray);
+    padding: 20px 0 15px 20px;
+    font-size: 20px;
+}
+
+.chart_heading_dates {
+    display: flex;
+
+    & > * {
+        flex-shrink: 0;
+    }
+}
+
+.chart_top_heading_block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px 0 0;
+}

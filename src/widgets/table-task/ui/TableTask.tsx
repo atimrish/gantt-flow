@@ -1,20 +1,20 @@
-import { useRootContext } from "@src/app/providers/rootProvider";
-import { updateTask } from "@src/features/task/api/updateTask";
-import { useThrottle } from "@src/shared/lib/use-throttle";
+import {useRootContext} from "@src/app/providers/rootProvider";
+import {updateTask} from "@src/features/task/api/updateTask";
+import {useThrottle} from "@src/shared/lib/use-throttle";
 import ButtonIcon from "@src/shared/ui/assets/images/table-task-button.svg";
-import { Typography } from "@src/shared/ui/typography";
-import { ContextMenu } from "@src/widgets/context-menu/ui";
-import { observer } from "mobx-react";
-import { useRef, useState } from "react";
+import {Typography} from "@src/shared/ui/typography";
+import {ContextMenu} from "@src/widgets/context-menu/ui";
+import {observer} from "mobx-react";
+import {useRef, useState} from "react";
 import * as s from "./TableTask.css";
-import {useTranslation} from 'react-i18next'
+import {useTranslation} from "react-i18next";
 
 type Props = {
 	id: IDBValidKey;
 };
 
 export const TableTask = observer((p: Props) => {
-	const {t} = useTranslation()
+	const {t} = useTranslation();
 	const [contextMenuOpen, setContextMenuOpen] = useState(false);
 	const contextMenuPosition = useRef({x: 0, y: 0});
 
@@ -47,16 +47,13 @@ export const TableTask = observer((p: Props) => {
 			notify.push({
 				id: performance.now(),
 				type: "success",
-				title: t('taskForm.notifies.taskDatesUpdate'),
+				title: t("taskForm.notifies.taskDatesUpdate"),
 			});
 		}
 	};
 
 	const handleMouseUpLeft = (e: MouseEvent) => {
 		e.stopPropagation();
-
-		
-
 		startMoveX = 0;
 		initWidth = 0;
 		initLeft = 0;
